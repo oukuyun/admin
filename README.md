@@ -1,10 +1,10 @@
-# 鼎聚網路後臺模板
+# 歐酷雲後臺模板
 ## 環境需求
-1. Laravel > 8.65
-1. PHP > 8.0
+1. Laravel > 9.0
+1. PHP > 8.1
 
 ## 環境配置
-1. `composer create-project laravel/laravel:8.* example-app`
+1. `composer create-project laravel/laravel:9.* example-app`
 2. `vi composer.json`
 3. `add`
     ```json
