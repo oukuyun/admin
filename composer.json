@@ -1,0 +1,38 @@
+{
+    "name": "oukuyun/admin",
+    "autoload": {
+        "psr-4": {
+            "Oukuyun\\Admin\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oukuyun\\Admin\\AdminServiceProvider"
+            ],
+            "aliases": {
+                "Universal":  "Oukuyun\\Admin\\Helpers\\Universal\\Universal",
+                "Settings": "Oukuyun\\Admin\\Helpers\\Universal\\Settings"
+            }
+        }
+    },
+    "authors": [
+        {
+            "name": "Henry",
+            "email": "asdcxz179@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^9.19",
+        "laravel/sanctum": "^3.0",
+        "laravel/tinker": "^2.7",
+        "fruitcake/laravel-cors": "^2.0",
+        "mews/captcha": "^3.2",
+        "owen-it/laravel-auditing": "^12.0",
+        "yadahan/laravel-authentication-log": "^1.5",
+        "yajra/laravel-datatables-oracle": "^9.19",
+        "spatie/laravel-sitemap": "^6.1"
+    }
+}
