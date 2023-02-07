@@ -9,18 +9,17 @@
 3. `add`
     ```json
         "repositories": {
-            "dinj/Admin": {
+            "oukuyun/admin": {
                 "type": "vcs",
-                "url": "git@github.com:DinJ-team/DinjAdmin.git"
+                "url": "git@github.com:oukuyun/admin.git"
             }
         }
     ```
-4. `composer require dinj/Admin`
+4. `composer require oukuyun/admin`
 5. `php artisan vendor:publish --tag=admin-public`
 6. `php artisan vendor:publish --tag=admin-config`
-7. `php artisan jwt:secret`
-8. `php artisan migrate`
-9. `php artisan db:seed --class="Dinj\Admin\Database\Seeders\DatabaseSeeder"`
+7. `php artisan migrate`
+8. `php artisan db:seed --class="Oukuyun\Admin\Database\Seeders\DatabaseSeeder"`
 
 ## 啟動服務
 1. `cd <folder name>`
