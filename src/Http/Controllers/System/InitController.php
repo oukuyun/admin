@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Oukuyun\Admin\Services\Admin\UsersService;
 use Oukuyun\Admin\Services\System\SettingsService;
 use Oukuyun\Admin\Http\Requests\Admin\Init\InitRequest;
+use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
 use DB;
 
 class InitController extends Controller
@@ -62,7 +63,7 @@ class InitController extends Controller
                 $this->SettingsService->updateSetting('*','init',1);
             });
         }
-        return ApiResponse::json(["message"=>"設定成功"]);
+        return redirect()->route('Backend.Login.index');
     }
 
 }

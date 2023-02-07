@@ -20,7 +20,7 @@ class Users extends UserModel
     ];
 
     public function info() {
-        return $this->hasMany(UsersInfo::class,'user_id','uuid')->where("key","!=","token");
+        return $this->hasMany(UsersInfo::class,'user_id','id')->where("key","!=","token");
     }
 
     public function lastLogin() {
@@ -28,7 +28,7 @@ class Users extends UserModel
     }
 
     public function isSuperAdmin(){
-        return $this->hasOne(UsersInfo::class,'user_id','uuid')->where("key","=","type")->first()->value==1;
+        return $this->hasOne(UsersInfo::class,'user_id','id')->where("key","=","type")->first()->value==1;
     }
 
     /** 

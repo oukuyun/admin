@@ -1,106 +1,163 @@
-@include('admin::layouts.header.head')
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        @yield('head')
-        <link href="{{Universal::version('/dinj/admin/assets/plugins/bootstrap-sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{Universal::version('/dinj/admin/assets/plugins/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css" />
-        <style type="text/css">
-            .account-pages{
-                background: url(/dinj/admin/images/background/lock-screen.jpg);
-                background-size: cover;
-            }
-            .captcha{
-                cursor: pointer;
-            }
-        </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+        <title>BOS PAY 管理后台登入</title>
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{{asset(Universal::version('backend/assets/media/favicons/favicon.png'))}}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{asset(Universal::version('backend/assets/media/favicons/favicon-192x192.png'))}}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset(Universal::version('backend/assets/media/favicons/apple-touch-icon-180x180.png'))}}">
+        <!-- END Icons -->
+        <!-- Codebase framework -->
+        <link rel="stylesheet" id="css-main" href="{{asset(Universal::version('backend/assets/css/codebase.min.css'))}}">
     </head>
+
     <body>
-        <div class="account-pages"></div>
-        <div class="clearfix"></div>
-        <div class="wrapper-page">
-            <div class="account-bg">
-                <div class="card-box mb-0">
-                    <div class="text-center m-t-20">
-                        <a href="#" class="logo">
-                            <p>{{ Settings::get("title") }}</p>
-                            <p>{{trans('admin::Admin.login_system')}}</p>
-                        </a>
-                    </div>
-                    <div class="m-t-10 p-20">
-                        <form class="m-t-20" name="login" data-parsley-validate>
-                            @csrf
-                            <div class="form-group first-group row">
-                                <div class="col-12">
-                                    <input name="email" class="form-control" type="email" required placeholder="{{trans('admin::Admin.field_username')}}">
-                                </div>
-                            </div>
+        <!-- Page Container -->
+        <!--
+        Available classes for #page-container:
 
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <input name="password" class="form-control" type="password" required placeholder="{{trans('admin::Admin.field_password')}}">
+        GENERIC
+
+            'remember-theme'                            Remembers active color theme and dark mode between pages using localStorage when set through
+                                                        - Theme helper buttons [data-toggle="theme"],
+                                                        - Layout helper buttons [data-toggle="layout" data-action="dark_mode_[on/off/toggle]"]
+                                                        - ..and/or Codebase.layout('dark_mode_[on/off/toggle]')
+
+        SIDEBAR & SIDE OVERLAY
+
+            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+            'sidebar-dark'                              Dark themed sidebar
+
+            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+            'side-overlay-o'                            Visible Side Overlay by default
+
+            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
+
+            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
+
+        HEADER
+
+            ''                                          Static Header if no class is added
+            'page-header-fixed'                         Fixed Header
+
+        HEADER STYLE
+
+            ''                                          Classic Header style if no class is added
+            'page-header-modern'                        Modern Header style
+            'page-header-dark'                          Dark themed Header (works only with classic Header style)
+            'page-header-glass'                         Light themed Header with transparency by default
+                                                        (absolute position, perfect for light images underneath - solid light background on scroll if the Header is also set as fixed)
+            'page-header-glass page-header-dark'        Dark themed Header with transparency by default
+                                                        (absolute position, perfect for dark images underneath - solid dark background on scroll if the Header is also set as fixed)
+
+        MAIN CONTENT LAYOUT
+
+            ''                                          Full width Main Content if no class is added
+            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+
+        DARK MODE
+
+            'sidebar-dark page-header-dark dark-mode'   Enable dark mode (light sidebar/header is not supported with dark mode)
+        -->
+        <div id="page-container" class="main-content-boxed">
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="bg-image" style="background-image: url('{{asset(Universal::version('backend/assets/media/photos/photo34@2x.jpg'))}}');">
+                    <div class="row mx-0 bg-black-50">
+                        <div class="hero-static col-md-6 col-xl-8 d-none d-md-flex align-items-md-end"></div>
+                        <div class="hero-static col-md-6 col-xl-4 d-flex align-items-center bg-body-extra-light">
+                            <div class="content content-full">
+                                <!-- Header -->
+                                <div class="px-4 py-2 mb-4">
+                                    <h1 class="h3 fw-bold mt-4 mb-2">{{env('APP_NAME')}} 管理系統登入</h1>
                                 </div>
-                            </div>
-                            <div class="form-group last-group row">
-                                <div class="col-12">
-                                    <div class="input-group">
-                                        <input name="captcha" class="form-control" type="text" required placeholder="{{trans('admin::Admin.field_captcha')}}" data-parsley-errors-container="#captcha-errors">
-                                        <span class="input-group-addon captcha">
-                                            <img class="img-fluid img-thumbnail" src="{{ route('Dinj.Captcha.index') }}" onclick="$(this).attr('src',`${$(this).attr('src')}?${Math.floor((Math.random()*10) + 1)}`);">
-                                        </span>
+                                <!-- END Header -->
+                                <form class="js-validation-signin px-4" name="login" action="{{route('Backend.Login.store')}}" method="POST">
+                                    @csrf
+                                    <div class="form-floating mb-4">
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="账号" value="{{old('email')}}">
+                                        <label class="form-label" for="email">帳號</label>
                                     </div>
-                                    <div id="captcha-errors"></div>
-                                </div>
+                                    <div class="form-floating mb-4">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                                        <label class="form-label" for="password">密码</label>
+                                        @error('password')
+                                            <div id="password-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input type="text" class="form-control" id="captcha" name="captcha" placeholder="驗證碼">
+                                        <label class="form-label" for="captcha">驗證碼</label>
+                                        @error('captcha')
+                                            <div id="captcha-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    
+                                    <img class="img-fluid img-thumbnail mb-3" src="{{ captcha_src() }}" onclick="$(this).attr('src',`${$(this).attr('src')}?${Math.floor((Math.random()*10) + 1)}`);">
+                                    @error('error')
+                                        <div class="invalid-feedback animated fadeIn mb-3" style="display:block">{{$message}}</div>
+                                    @enderror
+                                    <div class="mb-4">
+                                        <button type="submit" class="btn btn-lg btn-alt-primary fw-semibold">
+                                            登入
+                                        </button>
+                                    </div>
+                                </form>
+                                <!-- END Sign In Form -->
                             </div>
-                            
-                            <div class="form-group text-center row m-t-10">
-                                <div class="col-12">
-                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">{{trans('admin::Admin.login_login')}}</button>
-                                </div>
-                            </div>
-                        </form>
-
+                        </div>
                     </div>
-
-                    <div class="clearfix"></div>
                 </div>
-            </div>
-            <p style="color: #fff; font-size: 14px;text-align: center;">Copyright @ 2022 Dinj All right reserved.</p>
-
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
         </div>
+        <!-- END Page Container -->
+        <script src="{{asset(Universal::version('backend/assets/js/codebase.app.min.js'))}}"></script>
+        <!-- jQuery (required for Select2 + jQuery Validation plugins) -->
+        <script src="{{asset(Universal::version('backend/assets/js/lib/jquery.min.js'))}}"></script>
+
+        <!-- Page JS Plugins -->
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/messages_zh.min.js'))}}"></script>
+        <!-- Page JS Code -->
         <script>
-            var resizefunc = [];
-        </script>
-        <script src="{{Universal::version('/dinj/admin/assets/js/jquery.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/js/tether.min.js')}}"></script><!-- Tether for Bootstrap -->
-        <script src="{{Universal::version('/dinj/admin/assets/js/bootstrap.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/js/detect.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/js/fastclick.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/js/waves.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/toastr/toastr.min.js')}}"></script>
-        <script type="text/javascript" src="{{Universal::version('/dinj/admin/assets/plugins/parsleyjs/parsley.min.js')}}"></script>
-        <script type="text/javascript" src="{{Universal::version('/dinj/admin/assets/plugins/parsleyjs/i18n/zh_tw.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/js/ajax.js')}}" type="text/javascript"></script>
-        <script type="text/javascript">
-            var resizefunc = [];
-            var apiUrl = "{{url('/')}}";
-        </script>
-        <script type="text/javascript">
-            sendForm('form[name=login]', "{{route('Dinj.Login.store',[],false)}}", "POST",function(data){
-                toastr.options = {
-                    "showDuration": 100,
-                    "hideDuration": 300,
-                    "timeOut":1500,
-                    "onHidden": function() {
-                        location.href='{{ route('Admin.dashboard') }}';
+            Codebase.onLoad((
+                ()=>class{
+                    static initValidationSignIn(){
+                        Codebase.helpers("jq-validation"),
+                        $(".js-validation-signin").validate({
+                            rules:{
+                                "email":{
+                                    required:true,
+                                    email:true
+                                },
+                                "password":{
+                                    required:true,
+                                    minlength:6,
+                                    maxlength:20,
+                                },
+                                "captcha":{
+                                    required:true,
+                                }
+                            }
+                        })
                     }
-                };
-                toastr.success(data.message);
-            });
+                    static init(){
+                        this.initValidationSignIn()
+                    }
+                }.init()
+            ));
         </script>
-        @if(env('MODE') == 'template')
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/jquery-mockjax/jquery.mockjax.min.js')}}" type="text/javascript"></script>
-        <script src="{{Universal::version('/dinj/admin/js/mockjax.js')}}" type="text/javascript"></script>
-        @endif
     </body>
 </html>

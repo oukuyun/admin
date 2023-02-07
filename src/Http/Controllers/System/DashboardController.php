@@ -4,23 +4,9 @@ namespace Oukuyun\Admin\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
-use Oukuyun\Admin\Services\System\RoutesService;
-use Oukuyun\Admin\Services\Admin\AuthenticationLogService;
-use Oukuyun\Admin\Services\Admin\AuditService;
 
 class DashboardController extends Controller
 {
-    protected $RoutesService;
-    protected $AuthenticationLogService;
-    protected $AuditService;
-    
-    public function __construct(RoutesService $RoutesService,AuthenticationLogService $AuthenticationLogService,AuditService $AuditService)
-    {
-        $this->RoutesService = $RoutesService;
-        $this->AuthenticationLogService = $AuthenticationLogService;
-        $this->AuditService = $AuditService;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        
         if($request->expectsJson()) {
             return ApiResponse::json(["data" => [
                 "routes" => $this->RoutesService->getMenu()->makeMenu(),

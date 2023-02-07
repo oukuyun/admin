@@ -11,14 +11,6 @@ return [
     'locale'    =>  'zh-TW',
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'admin_users',
-        ],
-        'api' => [
-            'driver' => 'session',
-            'provider' => 'admin_users',
-        ],
         'admin' => [
             'driver' => 'session',
             'provider' => 'admin_users',
@@ -29,6 +21,15 @@ return [
         'admin_users' => [
             'driver' => 'eloquent',
             'model' => Oukuyun\Admin\Models\Admin\Users::class,
+        ],
+    ],
+
+    'passwords' => [
+        'admin_users' => [
+            "provider" => "admin_users",
+            "table" => "password_resets",
+            "expire" => 60,
+            "throttle" => 60,
         ],
     ],
 ];

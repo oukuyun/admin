@@ -45,9 +45,7 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        return ApiResponse::json([
-            "message" => "登入成功",
-            "data" => $this->UsersService->login($request->all(),$request->ip(),$request->userAgent())
-        ]);
+        $this->UsersService->login($request->all(),$request->ip(),$request->userAgent());
+        return redirect()->route('Backend.Dashboard.index');
     }
 }
