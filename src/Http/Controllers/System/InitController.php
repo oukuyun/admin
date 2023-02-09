@@ -8,6 +8,7 @@ use Oukuyun\Admin\Services\System\SettingsService;
 use Oukuyun\Admin\Http\Requests\Admin\Init\InitRequest;
 use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
 use DB;
+use Oukuyun\Admin\Helpers\Universal\Settings;
 
 class InitController extends Controller
 {
@@ -46,6 +47,9 @@ class InitController extends Controller
      */
     public function index()
     {
+        if($this->SettingsService->CheckInit()) {
+            return redirect()->route('Backend.Login.index');
+        }
         return view('admin::system.init');
     }
 

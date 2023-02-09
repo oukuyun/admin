@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use Oukuyun\Admin\Models\System\Settings;
 use Illuminate\Contracts\Events\Dispatcher;
 use Oukuyun\Admin\Console\Commands\System\SiteMap;
+use Illuminate\Support\Facades\Blade;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -104,6 +105,7 @@ class AdminServiceProvider extends ServiceProvider
         }
 
         Settings::observe(\Oukuyun\Admin\Observers\System\SettingsObserver::class);
+        Blade::componentNamespace('Oukuyun\\Admin\\View\\Components\\Backend', 'backend');
     }
 
     /**

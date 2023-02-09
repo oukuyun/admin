@@ -46,6 +46,6 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         $this->UsersService->login($request->all(),$request->ip(),$request->userAgent());
-        return redirect()->route('Backend.Dashboard.index');
+        return redirect()->route('Backend.dashboard.index');
     }
 }

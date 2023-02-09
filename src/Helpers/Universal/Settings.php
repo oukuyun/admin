@@ -14,6 +14,6 @@ class Settings
         $locale = App::currentLocale();
         $SettingsRepository = new SystemSettings();
 		$settings 	=	$SettingsRepository->getAllSettings($locale);
-		return ($key)?$settings[$key]:$settings;
+		return ($key)?$settings[$key]??'':$settings;
 	}
 }

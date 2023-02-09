@@ -1,241 +1,256 @@
-@include('admin::layouts.header.head')
-@include('admin::layouts.footer.foot')
-@include('admin::layouts.partials.loginRecords')
-@include('admin::layouts.partials.auditRecords')
-@include('admin::layouts.partials.routes')
-@include('admin::layouts.partials.updatePassword')
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        @yield('head')
-        <link href="{{Universal::version('/dinj/admin/assets/plugins/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{Universal::version('/dinj/admin/assets/plugins/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{Universal::version('/dinj/admin/assets/plugins/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{Universal::version('/dinj/admin/assets/plugins/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{Universal::version('/dinj/admin/assets/plugins/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
-        <!-- Plugins flatpickr v4.6.9 -->
-        <link href="{{ Universal::version('/dinj/admin/assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet">
-        <link href="{{ Universal::version('/dinj/admin/assets/plugins/flatpickr/themes/confetti.css') }}" rel="stylesheet">
-        @stack('style')
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    </head>
-    <body class="fixed-left">
-        <!-- Begin page -->
-        <div id="wrapper">
+        <title>{{env('APP_NAME')}} 管理后台</title>
 
-            <!-- Top Bar Start -->
-            <div class="topbar">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <link rel="shortcut icon" href="{{asset('backend/assets/media/favicons/favicon.png')}}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{asset('backend/assets/media/favicons/favicon-192x192.png')}}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('backend/assets/media/favicons/apple-touch-icon-180x180.png')}}">
+        <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css')}}">
+        <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css')}}">
+        <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css')}}">
+        <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/select2/css/select2.min.css')}}">
+        <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/sweetalert2/sweetalert2.min.css')}}">
+        <link rel="stylesheet" id="css-main" href="{{asset(Universal::version('backend/assets/css/codebase.min.css'))}}">
+  </head>
 
-                <!-- LOGO -->
-                <div class="topbar-left">
-                    <a href="/dinj/Admin" class="logo">
-                        
-                        <i class="zmdi zmdi-group-work icon-c-logo"></i>
-                        <span id="web-name">{{ Settings::get("title") }}</span>
-                    </a>
+  <body>
+        <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-dark sidebar-dark">
+            <!-- Side Overlay-->
+            <aside id="side-overlay">
+                <!-- Side Header -->
+                <div class="content-header">
+                    <!-- Close Side Overlay -->
+                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                    <button type="button" class="btn btn-sm btn-alt-danger ms-auto" data-toggle="layout" data-action="side_overlay_close">
+                        <i class="fa fa-fw fa-times"></i>
+                    </button>
+                    <!-- END Close Side Overlay -->
                 </div>
-
-                <nav class="navbar-custom">
-
-                    <ul class="list-inline float-right mb-0">
-                        
-                        <li class="list-inline-item dropdown notification-list">
-                            <a target="_blank" href="#" class="nav-link waves-effect waves-light" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="觀看前台">
-                                <i class="zmdi zmdi-laptop-mac noti-icon"></i>
-                            </a>
-                            @yield('loginRecords')
-                        </li>
-                        <li class="list-inline-item dropdown notification-list">
-                            <a class="nav-link waves-effect waves-light right-bar-toggle" href="javascript:void(0);">
-                                <i class="zmdi zmdi-assignment-o noti-icon"></i>
-                            </a>
-                        </li>
-
-                        <li class="list-inline-item dropdown notification-list">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="false" aria-expanded="false">
-                               <i style="font-size:25px;height: 27px" class="zmdi zmdi-account-o noti-icon"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="text-overflow"><small>您好 ! 鼎聚網路設計</small> </h5>
-                                </div>
-                                @if(Auth::user()->isSuperAdmin())
-                                <!-- item-->
-                                <a href="{{route('Admin.Users.index')}}" class="dropdown-item notify-item">
-                                    <i class="zmdi zmdi-settings"></i> <span>管理人員系統</span>
-                                </a>
-                                @endif
-                                <!-- item-->
-                                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="zmdi zmdi-menu"></i> <span>選單管理系統</span>
-                                </a> -->
-                                @if(env('LOCK_SCREEN',false))
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item" onclick="lockScreen()">
-                                    <i class="zmdi zmdi-lock-open"></i> <span>鎖定屏幕</span>
-                                </a>
-                                @endif
-                                @yield('updatePassword')
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item" onclick="logout()">
-                                    <i class="zmdi zmdi-power"></i> <span>登出系統</span>
-                                </a>
-
+                <!-- END Side Header -->
+                <!-- Side Content -->
+                <div class="content-side">
+                    <!-- Block -->
+                    <div class="block pull-x">
+                        <div class="block-header bg-body-light">
+                            <h3 class="block-title">Title</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                <i class="si si-refresh"></i>
+                                </button>
+                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
                             </div>
-                        </li>
-
-                    </ul>
-
-                    <ul class="list-inline menu-left mb-0">
-                        <li class="float-left">
-                            <button class="button-menu-mobile open-left waves-light waves-effect">
-                                <i class="zmdi zmdi-menu"></i>
-                            </button>
-                        </li>
-                    </ul>
-
-                </nav>
-
-            </div>
-            <!-- Top Bar End -->
-
-
-            <!-- ========== Left Sidebar Start ========== -->
-            <div class="left side-menu">
-                <div class="sidebar-inner slimscrollleft">
-
-                    <!--- Sidemenu -->
-                    @yield('routes')
-                    <!-- Sidebar -->
-                    <div class="clearfix"></div>
-
-                </div>
-
-            </div>
-            <!-- Left Sidebar End -->
-
-
-
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container-fluid">
-
-                        <div class="row">
-							<div class="col-xl-12">
-								<div class="page-title-box">
-                                    <h4 class="page-title float-left" id="page-name">{{__("admin::Admin.{$routeName}")}}</h4>
-
-                                    <ol class="breadcrumb float-right" id="routes">
-                                        @foreach($routePath as $item)
-                                            @if($item!=$routeName)
-                                            <li class="breadcrumb-item"><a href="{{route($item)}}">{{__("admin::Admin.{$item}")}}</a></li>
-                                            @else
-                                            <li class="breadcrumb-item active">{{__("admin::Admin.{$item}")}}</li>
-                                            @endif
-                                        @endforeach
-                                    </ol>
-
-                                    <div class="clearfix"></div>
-                                </div>
-							</div>
-						</div>
-                        <!-- end row -->
-
-                        <div class="loading-row">
-                            <div id="loading">
-                                <div class="loading-background">
-                                    <div class="spinner-border" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                </div>
-                            </div>
-                            @yield('content')
                         </div>
+                        <div class="block-content">
+                            <p>Content...</p>
+                        </div>
+                    </div>
+                    <!-- END Block -->
+                </div>
+                <!-- END Side Content -->
+            </aside>
+            <!-- END Side Overlay -->
+            <!-- Sidebar -->
+            <nav id="sidebar">
+                <!-- Sidebar Content -->
+                <div class="sidebar-content">
+                    <!-- Side Header -->
+                    <div class="content-header justify-content-lg-center">
+                        <!-- Logo -->
+                        <div>
+                            <a class="link-fx fw-bold tracking-wide mx-auto" href="{{route('Backend.dashboard.index')}}">
+                                <img src="{{asset(Universal::version('front/asset/images/logo.png'))}}" alt="" width="200">
+                            </a>
+                        </div>
+                        <!-- END Logo -->
 
-                    </div> <!-- container -->
-                </div> <!-- content -->
-            </div>
-            <!-- End content-page -->
-            @yield('auditRecords')
-            @yield('expansion')
+                        <!-- Options -->
+                        <div>
+                        <!-- Close Sidebar, Visible only on mobile screens -->
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <button type="button" class="btn btn-sm btn-alt-danger d-lg-none" data-toggle="layout" data-action="sidebar_close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                        <!-- END Close Sidebar -->
+                        </div>
+                        <!-- END Options -->
+                    </div>
+                    <!-- END Side Header -->
+
+                    <!-- Sidebar Scrolling -->
+                    <div class="js-sidebar-scroll">
+                        <!-- Side Navigation -->
+                        <div class="content-side content-side-full">
+                            <x-backend::sidebar/>
+                        </div>
+                        <!-- END Side Navigation -->
+                    </div>
+                    <!-- END Sidebar Scrolling -->
+                </div>
+                <!-- Sidebar Content -->
+            </nav>
+            <!-- END Sidebar -->
+
+            <!-- Header -->
+            <header id="page-header">
+                <!-- Header Content -->
+                <div class="content-header">
+                <!-- Left Section -->
+                <div class="space-x-1">
+                    <!-- Toggle Sidebar -->
+                    <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                    <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout" data-action="sidebar_toggle">
+                    <i class="fa fa-fw fa-bars"></i>
+                    </button>
+                    <!-- END Toggle Sidebar -->
+
+
+                    <!-- Color Themes (used just for demonstration) -->
+                    <!-- Themes functionality initialized in Codebase() -> uiHandleTheme() -->
+                    <!-- <div class="dropdown d-inline-block">
+                        <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-themes-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg p-0" aria-labelledby="page-header-themes-dropdown">
+                            <div class="p-3 bg-body-light rounded-top">
+                            <h5 class="h6 text-center mb-0">
+                                Color Themes
+                            </h5>
+                            </div>
+                            <div class="p-3">
+                            <div class="row g-0 text-center">
+                                <div class="col-2">
+                                <a class="text-default" data-toggle="theme" data-theme="default" href="javascript:void(0)">
+                                    <i class="fa fa-2x fa-circle"></i>
+                                </a>
+                                </div>
+                                <div class="col-2">
+                                <a class="text-elegance" data-toggle="theme" data-theme="assets/css/themes/elegance.min.css" href="javascript:void(0)">
+                                    <i class="fa fa-2x fa-circle"></i>
+                                </a>
+                                </div>
+                                <div class="col-2">
+                                <a class="text-pulse" data-toggle="theme" data-theme="assets/css/themes/pulse.min.css" href="javascript:void(0)">
+                                    <i class="fa fa-2x fa-circle"></i>
+                                </a>
+                                </div>
+                                <div class="col-2">
+                                <a class="text-flat" data-toggle="theme" data-theme="assets/css/themes/flat.min.css" href="javascript:void(0)">
+                                    <i class="fa fa-2x fa-circle"></i>
+                                </a>
+                                </div>
+                                <div class="col-2">
+                                <a class="text-corporate" data-toggle="theme" data-theme="assets/css/themes/corporate.min.css" href="javascript:void(0)">
+                                    <i class="fa fa-2x fa-circle"></i>
+                                </a>
+                                </div>
+                                <div class="col-2">
+                                <a class="text-earth" data-toggle="theme" data-theme="assets/css/themes/earth.min.css" href="javascript:void(0)">
+                                    <i class="fa fa-2x fa-circle"></i>
+                                </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- END Color Themes -->
+                </div>
+                <!-- END Left Section -->
+
+                <!-- Right Section -->
+                <div class="space-x-1">
+                    <!-- User Dropdown -->
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user d-sm-none"></i>
+                            <span class="d-none d-sm-inline-block fw-semibold">{{auth()->user()->name}}</span>
+                            <i class="fa fa-angle-down opacity-50 ms-1"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
+                            <div class="px-2 py-3 bg-body-light rounded-top">
+                                <h5 class="h6 text-center mb-0">
+                                {{auth()->user()->name}}
+                                </h5>
+                            </div>
+                            <div class="p-2">
+                                <!-- Toggle Side Overlay -->
+                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                                <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="{{route('Backend.password.index')}}">
+                                    <span>变更密码</span>
+                                    <i class="fa fa-fw fa-wrench opacity-25"></i>
+                                </a>
+                                <!-- END Side Overlay -->
+
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="{{route('Backend.logout.index')}}">
+                                    <span>登出</span>
+                                    <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END User Dropdown -->
+
+                    <!-- Toggle Side Overlay -->
+                    <!-- Layout API, functionality initialized in Codebase() -> uiApiLayout() -->
+                    <!-- <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout" data-action="side_overlay_toggle">
+                        <i class="fa fa-fw fa-stream"></i>
+                    </button> -->
+                    <!-- END Toggle Side Overlay -->
+                </div>
+                <!-- END Right Section -->
+                </div>
+                <!-- END Header Content -->
+
+                <!-- Header Loader -->
+                <div id="page-header-loader" class="overlay-header bg-primary">
+                    <div class="content-header">
+                        <div class="w-100 text-center">
+                        <i class="far fa-sun fa-spin text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Header Loader -->
+            </header>
+            <!-- END Header -->
             
-            <!-- /Right-bar -->
+            <!-- Main Container -->
+            @yield('content')
+            
+            <!-- END Main Container -->
 
-            <footer class="footer text-right">
-                <!-- 2016 - 2017 © Uplon. -->
-            </footer>
-
-
+            <!-- Footer -->
+            <!-- <footer id="page-footer">
+                <div class="content py-3">
+                    <div class="row fs-sm">
+                        <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
+                        Crafted with <i class="fa fa-heart text-danger"></i> by <a class="fw-semibold" href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
+                        </div>
+                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
+                        <a class="fw-semibold" href="https://1.envato.market/95j" target="_blank">Codebase 5.4</a> &copy; <span data-toggle="year-copy"></span>
+                        </div>
+                    </div>
+                </div>
+            </footer> -->
+            <!-- END Footer -->
         </div>
-        <!-- END wrapper -->
+    <!-- END Page Container -->
+        <script src="{{asset(Universal::version('backend/assets/js/codebase.app.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/sweetalert2/sweetalert2.min.js'))}}"></script>
+        <!-- jQuery (required for Select2 + jQuery Validation plugins) -->
+        <script src="{{asset(Universal::version('backend/assets/js/lib/jquery.min.js'))}}"></script>
 
-
-        <script>
-            var resizefunc = [];
-            var apiUrl = "{{url('/')}}";
-            var demo = {{json_encode((env("MODE") == "template"))}};
-        </script>
-
-        <!-- jQuery  -->
-        @yield('foot')
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/switchery/switchery.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/toastr/toastr.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/datatables/dataTables.responsive.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
-        <!-- Plugins flatpickr v4.6.9 -->
-        <script src="{{ Universal::version('/dinj/admin/assets/plugins/flatpickr/flatpickr.js') }}"></script>
-        <script src="{{ Universal::version('/dinj/admin/assets/plugins/flatpickr/l10n/zh-tw.js') }}"></script>
-        <script src="{{Universal::version('/dinj/admin/js/swal.js')}}" type="text/javascript"></script>
-        <script src="{{Universal::version('/dinj/admin/js/toast.js')}}" type="text/javascript"></script>
-        <script src="{{Universal::version('/dinj/admin/js/ajax.js')}}" type="text/javascript"></script>
-        <script src="{{Universal::version('/dinj/admin/js/common.js')}}" type="text/javascript"></script>
-        <script src="{{Universal::version('/dinj/admin/js/jquery.extends.js')}}" type="text/javascript"></script>
-        <script src="{{ Universal::version('/dinj/admin/js/axfetch.js') }}"></script>
-        <script src="{{ Universal::version('/dinj/admin/assets/js/jquery.serializeObject.min.js') }}"></script>
-        <script type="text/javascript" src="{{Universal::version('/dinj/admin/assets/plugins/parsleyjs/parsley.min.js')}}"></script>
-        <script type="text/javascript" src="{{Universal::version('/dinj/admin/assets/plugins/parsleyjs/i18n/zh_tw.js')}}"></script>
-        <script>
-            // set base api url
-            axfetch.setBaseUrl(apiUrl);
-            
-            if(demo) {
-                var system = localStorage.getItem('system');
-                if(!system) {
-                    location.href="/dinj/Admin/Init";
-                }
-                system = JSON.parse(system);
-                var web_name = system.find(item => item.name=="system[title]").value;
-                $("title,#web-name").html(web_name);
-            }
-            function logout() {
-                sendApi("{{route('Dinj.Logout.index',[],false)}}","GET",[]).done(function(){
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1000);
-                });
-            }
-            function lockScreen() {
-                sendApi("{{route('Dinj.LockScreen.index',[],false)}}","GET",[]).done(function(){
-                        location.reload();
-                });
-            }
-        </script>
-        @if(env('MODE') == 'template')
-        <script src="{{Universal::version('/dinj/admin/assets/plugins/jquery-mockjax/jquery.mockjax.min.js')}}" type="text/javascript"></script>
-        <script src="{{Universal::version('/dinj/admin/js/mockjax.js')}}" type="text/javascript"></script>
-        <script src="{{Universal::version('/dinj/admin/js/demo.js')}}" type="text/javascript"></script>
-        @endif
+        <!-- Page JS Plugins -->
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/messages_zh.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/ajax.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/common.js'))}}"></script>
         @stack('javascript')
-        <script src="{{Universal::version('/dinj/admin/assets/js/jquery.core.js')}}"></script>
-        <script src="{{Universal::version('/dinj/admin/assets/js/jquery.app.js')}}"></script>
     </body>
 </html>

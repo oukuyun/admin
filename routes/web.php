@@ -20,11 +20,15 @@ Route::middleware(['admin','admin.init'])->prefix('backend')->name('Backend.')->
 
     Route::middleware([
         'admin.auth',
-    //     // 'admin.admin',
+        // 'admin.admin',
     //     // 'admin.lockScreen'
     ])->group(function () {
-    //     /* 儀錶板 */
+        /* 儀錶板 */
         Route::resource('dashboard', 'System\DashboardController');
+        /* 變更密碼 */
+        Route::resource('password', 'Auth\PasswordController');
+        /* 變更密碼 */
+        Route::resource('logout', 'Auth\LogoutController');
     //     // /* 管理人員列表 */
     //     // Route::resource('Users', 'Admin\UsersController');
     //     // /* 管理人員登入紀錄 */
