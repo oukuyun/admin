@@ -250,6 +250,7 @@
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/'.__('admin::Admin.jquery-validation')))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js'))}}"></script>
         <script>
+            var error_lang = @json(__('admin::Admin.error'));
             var pagination_lang = @json(__('admin::pagination'));
         </script>
         <script src="{{asset(Universal::version('backend/assets/js/ajax.js'))}}"></script>

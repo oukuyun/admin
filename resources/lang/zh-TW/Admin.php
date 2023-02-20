@@ -39,7 +39,7 @@ return [
         'insertFail'        =>  '新增失敗',
         'updateFail'        =>  '更新失敗',
         'deleteFail'        =>  '刪除失敗',
-        'serverError'       =>  '系統錯誤',
+        'serverError'       =>  '系統錯誤，請聯繫技術人員',
     ],
 
     /* F */

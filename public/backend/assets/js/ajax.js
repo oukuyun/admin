@@ -47,16 +47,16 @@ $.ajaxSetup({
                 // }
                 // toastr.error(request.responseJSON.message);
                 break;
-            case 403:
-                Codebase.helpers('jq-notify', {
-                    align: 'right',             // 'right', 'left', 'center'
-                    from: 'top',                // 'top', 'bottom'
-                    type: 'warning',               // 'info', 'success', 'warning', 'danger'
-                    icon: 'fa fa-exclamation-triangle',    // Icon class
-                    message: "權限不足，請聯繫管理人員",
-                    delay:1000,
-                });
-                break;
+            // case 403:
+            //     Codebase.helpers('jq-notify', {
+            //         align: 'right',             // 'right', 'left', 'center'
+            //         from: 'top',                // 'top', 'bottom'
+            //         type: 'warning',               // 'info', 'success', 'warning', 'danger'
+            //         icon: 'fa fa-exclamation-triangle',    // Icon class
+            //         message: "權限不足，請聯繫管理人員",
+            //         delay:1000,
+            //     });
+            //     break;
             case 422:
                 Codebase.helpers('jq-notify', {
                     align: 'right',             // 'right', 'left', 'center'
@@ -73,7 +73,7 @@ $.ajaxSetup({
                     from: 'top',                // 'top', 'bottom'
                     type: 'danger',               // 'info', 'success', 'warning', 'danger'
                     icon: 'fa fa-times',    // Icon class
-                    message: "系統錯誤，請聯繫技術人員",
+                    message: error_lang.serverError,
                     delay:1000,
                 });
                 break;
