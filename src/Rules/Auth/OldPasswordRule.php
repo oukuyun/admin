@@ -36,6 +36,6 @@ class OldPasswordRule implements Rule
      */
     public function message()
     {
-        return "舊密碼不正確";
+        return __('admin::Admin.error.oldPasswordError');
     }
 }

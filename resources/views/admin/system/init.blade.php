@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="{{Universal::version('/bankend/assets/images/favicon.ico')}}">
 
         <!-- App title -->
-        <title>初次設定</title>
+        <title>{{__('admin::Admin.firstSetting')}}</title>
         <link href="{{Universal::version('/backend/assets/css/codebase.min.css')}}" rel="stylesheet" />
     </head>
     <body class="fixed-left">
@@ -25,8 +25,8 @@
                                 <i class="fa fa-fire"></i>
                                 <span class="fs-4 text-body-color">code</span><span class="fs-4">base</span>
                             </a>
-                            <h1 class="h3 fw-bold mt-5 mb-2">初次設定</h1>
-                            <h2 class="h5 fw-medium text-muted mb-0">建立屬於你自己的網站</h2>
+                            <h1 class="h3 fw-bold mt-5 mb-2">{{__('admin::Admin.firstSetting')}}</h1>
+                            <h2 class="h5 fw-medium text-muted mb-0">{{__('admin::Admin.createYourWebSite')}}</h2>
                         </div>
                     <!-- END Header -->
 
@@ -35,39 +35,39 @@
                         <div class="col-sm-8 col-md-6 col-xl-4">
                         <!-- jQuery Validation functionality is initialized with .js-validation-signin class in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js -->
                             <form class="js-validation-signin" action="{{route('Backend.Init.store')}}" method="POST" name="init">
-                                <h3>帳號</h3>
+                                <h3>{{__('admin::Admin.account')}}</h3>
                                 <div class="row g-sm mb-4">
                                     <div class="col-12 mb-4">
-                                        <label class="form-label" for="email">管理員帳號<span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="email" name="admin[email]" placeholder="管理員帳號">
+                                        <label class="form-label" for="email">{{__('admin::Admin.admin.email')}}<span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="email" name="admin[email]" placeholder="{{__('admin::Admin.admin.email')}}">
                                         @error('admin.email')
                                             <div id="email-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                         @enderror
                                     </div>
                                     <div class="col-12 mb-4">
-                                        <label class="form-label" for="password">管理員密碼<span class="text-danger">*</span></label>
-                                        <input type="password" class="form-control" id="password" name="admin[password]" placeholder="管理員密碼">
+                                        <label class="form-label" for="password">{{__('admin::Admin.admin.password')}}<span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" id="password" name="admin[password]" placeholder="{{__('admin::Admin.admin.password')}}">
                                         @error('admin.password')
                                             <div id="password-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                         @enderror
                                     </div>
                                     <div class="col-12 mb-4">
-                                        <label class="form-label" for="password_confirmation">確認密碼<span class="text-danger">*</span></label>
-                                        <input type="password" class="form-control" id="password_confirmation" name="admin[password_confirmation]" placeholder="確認密碼">
+                                        <label class="form-label" for="password_confirmation">{{__('admin::Admin.admin.confirmPassword')}}<span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" id="password_confirmation" name="admin[password_confirmation]" placeholder="{{__('admin::Admin.admin.confirmPassword')}}">
                                         @error('admin.password_confirmation')
                                             <div id="password-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                         @enderror
                                     </div>
                                     <div class="col-12 mb-4">
-                                        <label class="form-label" for="name">管理員名稱<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="admin[name]" placeholder="管理員名稱" >
+                                        <label class="form-label" for="name">{{__('admin::Admin.admin.name')}}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="name" name="admin[name]" placeholder="{{__('admin::Admin.admin.name')}}" >
                                         @error('admin.name')
                                             <div id="name-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                         @enderror
                                     </div>
                                     <div class="col-12 mb-2">
                                         <button type="submit" class="btn btn-lg btn-alt-primary w-100 py-3 fw-semibold">
-                                            完成
+                                        {{__('admin::Admin.finish')}}
                                         </button>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
         <script src="{{Universal::version('/backend/assets/js/lib/jquery.min.js')}}"></script>
         <!-- Page JS Plugins -->
         <script src="{{Universal::version('/backend/assets/js/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-        <script src="{{Universal::version('/backend/assets/js/plugins/jquery-validation/localization/messages_zh.min.js')}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/'.__('admin::Admin.jquery-validation')))}}"></script>
         <script>
             Codebase.onLoad((
                 ()=>class{

@@ -5,9 +5,9 @@
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <h3 class="block-title">管理員管理</h3>
+                <h3 class="block-title">{{__('admin::Admin.adminManger')}}</h3>
                 <div class="block-options">
-                    <a href="{{route('Backend.admin.create')}}" class="btn btn-sm btn-primary">新增</a>
+                    <a href="{{route('Backend.admin.create')}}" class="btn btn-sm btn-primary">{{__('admin::Admin.insert')}}</a>
                     <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
                     <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" id="reload">
                         <i class="si si-refresh"></i>
@@ -20,12 +20,12 @@
                     <thead>
                         <tr>
                             <th class="text-center"></th>
-                            <th>帳號</th>
-                            <th>暱稱</th>
-                            <th>最後登入時間</th>
-                            <th>登入次數</th>
-                            <th style="width: 15%;">狀態</th>
-                            <th class="text-center" style="width: 15%;">操作</th>
+                            <th>{{__('admin::Admin.admin.email')}}</th>
+                            <th>{{__('admin::Admin.admin.name')}}</th>
+                            <th>{{__('admin::Admin.lastLoginTime')}}</th>
+                            <th>{{__('admin::Admin.loginTimes')}}</th>
+                            <th style="width: 15%;">{{__('admin::Admin.status')}}</th>
+                            <th class="text-center" style="width: 15%;">{{__('admin::Admin.operate')}}</th>
                         </tr>
                     </thead>
                     <tbody>

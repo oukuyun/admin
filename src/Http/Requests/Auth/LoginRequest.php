@@ -23,9 +23,9 @@ class LoginRequest extends BasicFormRequest
 
     public function attributes(){
         return [
-            'email' => "帳號",
-            'password' => "密碼",
-            'captcha'   =>  "驗證碼",
+            'email'     =>  __('admin::Admin.admin.email'),
+            'password'  =>  __('admin::Admin.admin.password'),
+            'captcha'   =>  __('admin::Admin.admin.captcha'),
         ];
     }
 }

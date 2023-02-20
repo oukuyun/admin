@@ -23,10 +23,10 @@ class InitRequest extends BasicFormRequest
     
     public function attributes(){
         return [
-            'admin.name'    => "管理員名稱",
-            'admin.email'       => "管理員帳號",
-            'admin.password'    => "管理員密碼",
-            'admin.password_confirmation'    => "確認密碼",
+            'admin.name'                    =>  __('admin::Admin.admin.name'),
+            'admin.email'                   =>  __('admin::Admin.admin.email'),
+            'admin.password'                =>  __('admin::Admin.admin.password'),
+            'admin.password_confirmation'   =>  __('admin::Admin.admin.confirmPassword'),
         ];
     }
 }

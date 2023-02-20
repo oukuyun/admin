@@ -9,8 +9,8 @@
     @enderror
     <div class="row">
         <div class="mb-4">
-            <button type="submit" class="btn btn-primary">送出</button>
-            <a href="{{$form['back']}}" class="btn btn-secondary">返回</a>
+            <button type="submit" class="btn btn-primary">{{__('admin::Admin.sent')}}</button>
+            <a href="{{$form['back']}}" class="btn btn-secondary">{{__('admin::Admin.back')}}</a>
         </div>
     </div>
 </form>

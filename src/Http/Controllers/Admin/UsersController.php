@@ -95,8 +95,8 @@ class UsersController extends Controller
             'tag'           =>  'input',
             'type'          =>  'email',
             'name'          =>  'email',
-            'text'          =>  '账号',
-            'placeholder'   =>  '账号',
+            'text'          =>  'admin::Admin.admin.email',
+            'placeholder'   =>  'admin::Admin.admin.email',
             'required'      =>  true,
             'rules'         =>  [
                 'required'  =>  true,
@@ -106,8 +106,8 @@ class UsersController extends Controller
             'tag'           =>  'input',
             'type'          =>  'text',
             'name'          =>  'name',
-            'text'          =>  '昵称',
-            'placeholder'   =>  '昵称',
+            'text'          =>  'admin::Admin.admin.name',
+            'placeholder'   =>  'admin::Admin.admin.name',
             'required'      =>  true,
             'rules'         =>  [
                 'required'  =>  true,
@@ -117,8 +117,8 @@ class UsersController extends Controller
             'tag'           =>  'input',
             'type'          =>  'password',
             'name'          =>  'password',
-            'text'          =>  '密码',
-            'placeholder'   =>  '密码',
+            'text'          =>  'admin::Admin.admin.password',
+            'placeholder'   =>  'admin::Admin.admin.password',
             'required'      =>  true,
             'rules'         =>  [
                 'required'  =>  true,
@@ -129,8 +129,8 @@ class UsersController extends Controller
             'tag'           =>  'input',
             'type'          =>  'password',
             'name'          =>  'password_confirmation',
-            'text'          =>  '确认密码',
-            'placeholder'   =>  '确认密码',
+            'text'          =>  'admin::Admin.admin.confirmPassword',
+            'placeholder'   =>  'admin::Admin.admin.confirmPassword',
             'required'      =>  true,
             'rules'         =>  [
                 'required'  =>  true,
@@ -142,6 +142,7 @@ class UsersController extends Controller
     
     public function __construct(UsersService $UsersService)
     {
+        $this->form['back'] =   route('Backend.admin.index');
         $this->UsersService = $UsersService;
     }
     /**
@@ -179,7 +180,11 @@ class UsersController extends Controller
     public function store(StoreRequest $request)
     {
         $this->UsersService->store($request->all());
-        return ApiResponse::json(["message"=>"新增成功"]);
+        if($request->ajax()) {
+            return ApiResponse::json(["message"=>__('admin::Admin.success.insertSuccess')]);
+        }else{
+            return redirect()->route('Backend.admin.index');
+        }
     }
 
     /**
@@ -199,9 +204,23 @@ class UsersController extends Controller
      * @param  \App\Models\Admin\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(Users $users)
+    public function edit($id)
     {
-        $data['method'] = "PUT";
+        $data['detail'] = $this->UsersService->getUser($id);
+        $this->form['action']   =   route('Backend.admin.update',['admin'=>$id]);
+        $this->form['method']   =   "PUT";
+        foreach($data['detail']->toArray() as $field => $detail) {
+            if(isset($this->fields[$field])) {
+                $this->fields[$field]['value']  =   $detail;
+            }
+        }
+        $this->fields['email']['disabled'] = true;
+        $this->fields['password']['required'] = false;
+        unset($this->fields['password']['rules']['required']);
+        $this->fields['password_confirmation']['required'] = false;
+        unset($this->fields['password_confirmation']['rules']['required']);
+        $data['form']   =   $this->form;
+        \View::share('fields',$this->fields);
         return view('admin::admin.form',$data);
     }
 
@@ -215,9 +234,13 @@ class UsersController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         DB::beginTransaction();
-        $this->UsersService->updateUser($request->all(),$id);
+        $this->UsersService->update($request->all(),$id);
         DB::commit();
-        return ApiResponse::json(["message"=>"更新成功"]);
+        if($request->ajax()) {
+            return ApiResponse::json(["message"=>__('admin::Admin.success.updateSuccess')]);
+        }else{
+            return redirect()->route('Backend.admin.index');
+        }
     }
 
     /**
@@ -228,7 +251,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $this->UsersService->deleteUser($id);
-        return ApiResponse::json(["message"=>"刪除成功"]);
+        $this->UsersService->delete($id);
+        return ApiResponse::json(["message"=>__('admin::Admin.success.deleteSuccess')]);
     }
 }

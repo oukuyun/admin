@@ -32,9 +32,9 @@ class StoreRequest extends BasicFormRequest
 
     public function attributes(){
         return [
-            'name'  => "管理員名稱",
-            'email' => "帳號",
-            'password' => "密碼",
+            'name'      =>  __('admin::Admin.admin.name'),
+            'email'     =>  __('admin::Admin.admin.email'),
+            'password'  =>  __('admin::Admin.admin.password'),
         ];
     }
 }

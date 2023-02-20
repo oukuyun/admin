@@ -249,6 +249,9 @@
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/'.__('admin::Admin.jquery-validation')))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js'))}}"></script>
+        <script>
+            var pagination_lang = @json(__('admin::pagination'));
+        </script>
         <script src="{{asset(Universal::version('backend/assets/js/ajax.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/common.js'))}}"></script>
         @stack('javascript')

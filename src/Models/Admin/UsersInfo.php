@@ -17,9 +17,4 @@ class UsersInfo extends Model
     protected $hidden = [
         "user_id",
     ];
-
-    public function getTypeNameAttribute($value) {
-        $name = "admin::Admin.ADMIN_TYPE.{$value}";
-        return Lang::has($name)?trans($name):$value;
-    }
 }

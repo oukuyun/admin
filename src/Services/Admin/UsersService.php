@@ -55,7 +55,7 @@ class UsersService
      */
     public function index($data) {
         $where = Arr::only($data,["name","email","status"]);
-        return DataTables::of($this->UsersRepository->listQuery($where)->orderby('created_at'))->make();
+        return DataTables::of($this->UsersRepository->listQuery($where))->make();
     }
 
     /**
@@ -83,11 +83,11 @@ class UsersService
         $createData['status'] = 1;
         $user     =   $this->UsersRepository->create($createData);
         if(!$user){
-            throw new ErrorException(['data' => ['error' => trans('common.InsertFail')]],trans('common.InsertFail'),500);
+            throw new ErrorException(['data' => ['error' => __('admin::Admin.error.insertFail')]],__('admin::Admin.error.insertFail'),500);
         }
-        $result = $this->updateUserInfo($user, $data);
+        $result = $this->updateInfo($user, $data);
         if(!$result){
-            throw new ErrorException(['data' => ['error' => trans('common.InsertFail')]],trans('common.InsertFail'),500);
+            throw new ErrorException(['data' => ['error' => __('admin::Admin.error.insertFail')]],__('admin::Admin.error.insertFail'),500);
         }
         return $user;
     }
@@ -109,11 +109,11 @@ class UsersService
         $model =  $this->UsersRepository->find($uuid);
         $user = $model->update($updateData);
         if(!$user){
-            throw new ErrorException([],trans('common.UpdateFail'),500);
+            throw new ErrorException(['data' => ['error' => __('admin::Admin.error.updateFail')]],__('admin::Admin.error.updateFail'),500);
         }
-        $result = $this->updateUserInfo($model, $data);
+        $result = $this->updateInfo($model, $data);
         if(!$result){
-            throw new ErrorException([],trans('common.UpdateFail'),500);
+            throw new ErrorException(['data' => ['error' => __('admin::Admin.error.updateFail')]],__('admin::Admin.error.updateFail'),500);
         }
         return $user;
     }
@@ -129,7 +129,7 @@ class UsersService
     public function delete(string $uuid) {
         $user = $this->UsersRepository->find($uuid)->delete();
         if(!$user){
-            throw new ErrorException([],trans('common.DeleteFail'),500);
+            throw new ErrorException(['data' => ['error' => __('admin::Admin.error.deleteFail')]],__('admin::Admin.error.deleteFail'),500);
         }
         return $user;
     }
@@ -155,7 +155,7 @@ class UsersService
     public function login(array $request,string $ip,string $userAgent) {
         $credentials = Arr::only($request,["email","password"]);
         if (! $token = auth()->attempt(array_merge($credentials,['status' => 1]))) {
-            throw new ErrorException(['data'=>['error'=>'帳號或密碼錯誤']],"帳號或密碼錯誤",401);
+            throw new ErrorException(['data'=>['error'=>__('admin::Admin.error.accountOrPasswordError')]],__('admin::Admin.error.accountOrPasswordError'),401);
         }
         if(env("ADMIN_MUTIPLE_LOGIN",false)) {
             Auth::logoutOtherDevices($credentials['password']);
@@ -181,7 +181,7 @@ class UsersService
         $user_id    =   auth()->user()->id;
         auth()->logout();
         if(!$result){
-            throw new ErrorException([],trans('common.ServiceError'),500);
+            throw new ErrorException(['data'=>['error'=>__('admin::Admin.error.serverError')]],__('admin::Admin.error.serverError'),500);
         }
     }
     
@@ -191,7 +191,7 @@ class UsersService
      * @param  mixed $data
      * @return boolean
      */
-    public function updateUserInfo($user, array $data) {
+    public function updateInfo($user, array $data) {
         $info = ["type"];
         foreach(Arr::only($data,$info) as $key => $value){
             $result = $user->info()->updateOrCreate(["key" => $key],["value" => $value]);
@@ -201,19 +201,26 @@ class UsersService
         }
         return true;
     }
-
-    public function updateUserPassword(array $data, string $uuid) {
+    
+    /**
+     * 變更密碼
+     *
+     * @param  mixed $data
+     * @param  mixed $id
+     * @return void
+     */
+    public function updatePassword(array $data, string $id) {
         $updateData = Arr::only($data,['password']);
-        $user = $this->UsersRepository->find($uuid);
+        $user = $this->UsersRepository->find($id);
         if(!Hash::check($data['old_password'],$user->password)) {
-            throw new ErrorException([],"舊密碼不正確",422);
+            throw new ErrorException(['data'=>['error'=>__('admin::Admin.error.oldPasswordError')]],__('admin::Admin.error.oldPasswordError'),422);
         }
         if(isset($data['password']) && $data['password']){
             $updateData['password'] =   $this->MakePassword($data['password']);
         }
         $result =  $user->update($updateData);
         if(!$result){
-            throw new ErrorException([],trans('common.UpdateFail'),500);
+            throw new ErrorException(['data' => ['error' => __('admin::Admin.error.updateFail')]],__('admin::Admin.error.updateFail'),500);
         }
     }
 

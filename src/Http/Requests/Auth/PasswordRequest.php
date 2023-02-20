@@ -21,9 +21,8 @@ class PasswordRequest extends FormRequest
 
     public function attributes(){
         return [
-            'old_password'  => "旧密码",
-            'password' => "新密码",
-            'password_confirmation'  => "确认密码"
+            'old_password'  =>  __('admin::Admin.admin.oldPassword'),
+            'password'      =>  __('admin::Admin.admin.newPassword'),
         ];
     }
 }

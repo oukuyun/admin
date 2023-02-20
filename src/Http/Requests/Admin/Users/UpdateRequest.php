@@ -1,15 +1,14 @@
 <?php
 
-namespace Dinj\Admin\Http\Requests\Admin\Users;
+namespace Oukuyun\Admin\Http\Requests\Admin\Users;
 
-use Dinj\Admin\Http\Requests\Universal\BasicFormRequest;
+use Oukuyun\Admin\Http\Requests\Universal\BasicFormRequest;
 
 class UpdateRequest extends BasicFormRequest
 {
     protected $updateData = [
         'name'      =>  'required|string|between:1,20',
         'password'  =>  'nullable|string|between:6,20|confirmed',
-        'type'      =>  'required|in:1,2,3',
     ];
 
     protected $updateStatus = [
@@ -37,9 +36,9 @@ class UpdateRequest extends BasicFormRequest
 
     public function attributes(){
         return [
-            'name'  => "管理員名稱",
-            'email' => "帳號",
-            'type'  => "管理權限"
+            'name'      =>  __('admin::Admin.admin.name'),
+            'email'     =>  __('admin::Admin.admin.email'),
+            'password'  =>  __('admin::Admin.admin.password'),
         ];
     }
 }
