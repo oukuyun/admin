@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        <title>{{env('APP_NAME')}} 管理后台</title>
+        <title>{{env('APP_NAME')}}-{{__('admin::Admin.backendSystem')}}</title>
 
         <meta name="robots" content="noindex, nofollow">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -181,14 +181,14 @@
                                 <!-- Toggle Side Overlay -->
                                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
                                 <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="{{route('Backend.password.index')}}">
-                                    <span>变更密码</span>
+                                    <span>{{__('admin::Admin.changePassword')}}</span>
                                     <i class="fa fa-fw fa-wrench opacity-25"></i>
                                 </a>
                                 <!-- END Side Overlay -->
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="{{route('Backend.logout.index')}}">
-                                    <span>登出</span>
+                                    <span>{{__('admin::Admin.logout')}}</span>
                                     <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
                                 </a>
                             </div>
@@ -247,7 +247,7 @@
 
         <!-- Page JS Plugins -->
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
-        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/messages_zh.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/'.__('admin::Admin.jquery-validation')))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/ajax.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/common.js'))}}"></script>

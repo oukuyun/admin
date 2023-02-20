@@ -5,7 +5,7 @@
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <h3 class="block-title">变更密码</h3>
+                <h3 class="block-title">{{__('admin::Admin.changePassword')}}</h3>
             </div>
             <div class="block-content">
                 <div class="row">
@@ -13,25 +13,25 @@
                         <form action="{{route('Backend.password.store')}}" method="POST" name="update-password">
                             @csrf
                             <div class="mb-4">
-                                <label class="form-label" for="old_password">旧密码 <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" id="old_password" name="old_password" placeholder="旧密码">
+                                <label class="form-label" for="old_password">{{__('admin::Admin.admin.oldPassword')}}<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" id="old_password" name="old_password" placeholder="{{__('admin::Admin.admin.oldPassword')}}">
                                 @error('old_password')
                                     <div id="account-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label class="form-label" for="password">新密码 <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="新密码">
+                                <label class="form-label" for="password">{{__('admin::Admin.admin.newPassword')}}<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="{{__('admin::Admin.admin.newPassword')}}">
                                 @error('password')
                                     <div id="account-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label class="form-label" for="password_confirmation">确认密码 <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="确认密码">
+                                <label class="form-label" for="password_confirmation">{{__('admin::Admin.admin.confirmPassword')}}<span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="{{__('admin::Admin.admin.confirmPassword')}}">
                             </div>
                             <div class="mb-4">
-                                <button type="submit" class="btn btn-primary">送出</button>
+                                <button type="submit" class="btn btn-primary">{{__('admin::Admin.change')}}</button>
                             </div>
                         </form>
                     </div>
@@ -51,14 +51,14 @@
                 $(`form[name="update-password"]`).validate({
                     rules:{
                         "old_password":{
-                            required:!'',
+                            required:true,
                         },
                         "password":{
-                            required:!'',
+                            required:true,
                             minlength:6,
                         },
                         "password_confirmation":{
-                            required:!'',
+                            required:true,
                             minlength:6,
                             equalTo: "#password"
                         }

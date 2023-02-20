@@ -29,6 +29,8 @@ Route::middleware(['admin','admin.init'])->prefix('backend')->name('Backend.')->
         Route::resource('password', 'Auth\PasswordController');
         /* 變更密碼 */
         Route::resource('logout', 'Auth\LogoutController');
+        /* 管理員管理 */
+        Route::resource('admin', 'Admin\UsersController');
     //     // /* 管理人員列表 */
     //     // Route::resource('Users', 'Admin\UsersController');
     //     // /* 管理人員登入紀錄 */

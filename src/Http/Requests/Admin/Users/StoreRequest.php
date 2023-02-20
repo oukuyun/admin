@@ -1,8 +1,8 @@
 <?php
 
-namespace Dinj\Admin\Http\Requests\Admin\Users;
+namespace Oukuyun\Admin\Http\Requests\Admin\Users;
 
-use Dinj\Admin\Http\Requests\Universal\BasicFormRequest;
+use Oukuyun\Admin\Http\Requests\Universal\BasicFormRequest;
 
 class StoreRequest extends BasicFormRequest
 {
@@ -27,8 +27,6 @@ class StoreRequest extends BasicFormRequest
             'email'     =>  'required|string|email|max:255|unique:admin_users,email',
             'name'      =>  'required|string|between:1,20',
             'password'  =>  'required|string|between:6,20|confirmed',
-            'type'      =>  'required|in:1,2,3',
-            // 'permissions' => 'nullable|array'
         ];
     }
 
@@ -36,7 +34,7 @@ class StoreRequest extends BasicFormRequest
         return [
             'name'  => "管理員名稱",
             'email' => "帳號",
-            'type'  => "管理權限"
+            'password' => "密碼",
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Backend;
+namespace Oukuyun\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 
@@ -26,6 +26,6 @@ class Form extends Component
      */
     public function render()
     {
-        return view('components.backend.form');
+        return view('admin::components.backend.form');
     }
 }

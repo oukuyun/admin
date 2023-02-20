@@ -4,11 +4,11 @@
         <div class="{{$item['class']}}">
             @foreach($item['col'] as $sub_item)
                 @if($sub_item['class'] == 'row')
-                    <x-backend.row :row="$sub_item" />
+                    <x-backend::row :row="$sub_item" />
                 @elseif($sub_item['class'] == 'fields')
                     @switch($fields[$sub_item['field']]['tag'])
                         @case('select')
-                        <x-backend.select 
+                        <x-backend::select 
                             :options="$fields[$sub_item['field']]['options']" 
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
@@ -19,7 +19,7 @@
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('input')
-                        <x-backend.input 
+                        <x-backend::input 
                             :tag="$fields[$sub_item['field']]['tag']" 
                             :type="$fields[$sub_item['field']]['type']" 
                             :text="$fields[$sub_item['field']]['text']" 

@@ -55,7 +55,7 @@ class UsersService
      */
     public function index($data) {
         $where = Arr::only($data,["name","email","status"]);
-        return DataTables::of($this->UsersRepository->listQuery($where)->orderby('created_at')->getEntity())->make();
+        return DataTables::of($this->UsersRepository->listQuery($where)->orderby('created_at'))->make();
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Backend;
+namespace Oukuyun\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 
@@ -38,6 +38,6 @@ class Input extends Component
      */
     public function render()
     {
-        return view("components.backend.{$this->tag}");
+        return view("admin::components.backend.{$this->tag}");
     }
 }

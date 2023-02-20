@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Backend;
+namespace Oukuyun\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 
@@ -24,6 +24,6 @@ class Row extends Component
      */
     public function render()
     {
-        return view('components.backend.row');
+        return view('admin::components.backend.row');
     }
 }

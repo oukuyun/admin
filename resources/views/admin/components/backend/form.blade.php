@@ -2,7 +2,7 @@
     <input type="hidden" name="_method" value="{{$form['method']}}">
     @csrf
     @foreach($form['form'] as $row)
-    <x-backend.row :row="$row" />
+    <x-backend::row :row="$row" />
     @endforeach
     @error('error')
         <div id="error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>

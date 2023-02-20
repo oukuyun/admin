@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        <title>BOS PAY 管理后台登入</title>
+        <title>{{env('APP_NAME')}}-{{__('admin::Admin.backendSystem')}}</title>
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
         <link rel="shortcut icon" href="{{asset(Universal::version('backend/assets/media/favicons/favicon.png'))}}">
@@ -16,57 +16,6 @@
     </head>
 
     <body>
-        <!-- Page Container -->
-        <!--
-        Available classes for #page-container:
-
-        GENERIC
-
-            'remember-theme'                            Remembers active color theme and dark mode between pages using localStorage when set through
-                                                        - Theme helper buttons [data-toggle="theme"],
-                                                        - Layout helper buttons [data-toggle="layout" data-action="dark_mode_[on/off/toggle]"]
-                                                        - ..and/or Codebase.layout('dark_mode_[on/off/toggle]')
-
-        SIDEBAR & SIDE OVERLAY
-
-            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
-            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
-            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
-            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
-            'sidebar-dark'                              Dark themed sidebar
-
-            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
-            'side-overlay-o'                            Visible Side Overlay by default
-
-            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
-
-            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
-
-        HEADER
-
-            ''                                          Static Header if no class is added
-            'page-header-fixed'                         Fixed Header
-
-        HEADER STYLE
-
-            ''                                          Classic Header style if no class is added
-            'page-header-modern'                        Modern Header style
-            'page-header-dark'                          Dark themed Header (works only with classic Header style)
-            'page-header-glass'                         Light themed Header with transparency by default
-                                                        (absolute position, perfect for light images underneath - solid light background on scroll if the Header is also set as fixed)
-            'page-header-glass page-header-dark'        Dark themed Header with transparency by default
-                                                        (absolute position, perfect for dark images underneath - solid dark background on scroll if the Header is also set as fixed)
-
-        MAIN CONTENT LAYOUT
-
-            ''                                          Full width Main Content if no class is added
-            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
-            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
-
-        DARK MODE
-
-            'sidebar-dark page-header-dark dark-mode'   Enable dark mode (light sidebar/header is not supported with dark mode)
-        -->
         <div id="page-container" class="main-content-boxed">
 
             <!-- Main Container -->
@@ -79,25 +28,25 @@
                             <div class="content content-full">
                                 <!-- Header -->
                                 <div class="px-4 py-2 mb-4">
-                                    <h1 class="h3 fw-bold mt-4 mb-2">{{env('APP_NAME')}} 管理系統登入</h1>
+                                    <h1 class="h3 fw-bold mt-4 mb-2">{{env('APP_NAME')}} {{__('admin::Admin.systemLogin')}}</h1>
                                 </div>
                                 <!-- END Header -->
                                 <form class="js-validation-signin px-4" name="login" action="{{route('Backend.Login.store')}}" method="POST">
                                     @csrf
                                     <div class="form-floating mb-4">
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="账号" value="{{old('email')}}">
-                                        <label class="form-label" for="email">帳號</label>
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="{{__('admin::Admin.admin.email')}}" value="{{old('email')}}">
+                                        <label class="form-label" for="email">{{__('admin::Admin.admin.email')}}</label>
                                     </div>
                                     <div class="form-floating mb-4">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="密码">
-                                        <label class="form-label" for="password">密码</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="{{__('admin::Admin.admin.password')}}">
+                                        <label class="form-label" for="password">{{__('admin::Admin.admin.password')}}</label>
                                         @error('password')
                                             <div id="password-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                         @enderror
                                     </div>
                                     <div class="form-floating mb-4">
-                                        <input type="text" class="form-control" id="captcha" name="captcha" placeholder="驗證碼">
-                                        <label class="form-label" for="captcha">驗證碼</label>
+                                        <input type="text" class="form-control" id="captcha" name="captcha" placeholder="{{__('admin::Admin.admin.captcha')}}">
+                                        <label class="form-label" for="captcha">{{__('admin::Admin.admin.captcha')}}</label>
                                         @error('captcha')
                                             <div id="captcha-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
                                         @enderror
@@ -109,7 +58,7 @@
                                     @enderror
                                     <div class="mb-4">
                                         <button type="submit" class="btn btn-lg btn-alt-primary fw-semibold">
-                                            登入
+                                        {{__('admin::Admin.login')}}
                                         </button>
                                     </div>
                                 </form>
@@ -129,7 +78,7 @@
 
         <!-- Page JS Plugins -->
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
-        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/messages_zh.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/'.__('admin::Admin.jquery-validation')))}}"></script>
         <!-- Page JS Code -->
         <script>
             Codebase.onLoad((
