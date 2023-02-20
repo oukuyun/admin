@@ -18,9 +18,24 @@ class Users extends UserModel
         'password',
         'status',
     ];
+    protected $appends = [
+        'login_count',
+        'last_login_time'
+    ];
+    protected $hidden = [
+        'info','lastLogin',
+    ];
 
     public function info() {
         return $this->hasMany(UsersInfo::class,'user_id','id')->where("key","!=","token");
+    }
+
+    public function getLoginCountAttribute() {
+        return $this->info->pluck('value','key')['login_count']??0;
+    }
+
+    public function getLastLoginTimeAttribute() {
+        return ($this->lastLogin)?$this->lastLogin->login_at->toDateTimeString():'';
     }
 
     public function lastLogin() {
@@ -47,9 +62,7 @@ class Users extends UserModel
      * @author Henry
      */
     public function getDetail(string $uuid) {
-        return $this->select($this->detail)->with(["info" => function($query){
-            $query->select(["key","value","user_id"]);
-        }])->find($uuid);
+        return $this->select($this->detail)->find($uuid);
     }
     
     /**
@@ -60,9 +73,7 @@ class Users extends UserModel
      * @author Henry
      */
     public function listQuery(array $where) {
-        $query = $this->where($where)->select($this->detail)->with(["info" => function($query){
-            $query->select(["key","value","user_id",DB::raw('value as type_name')]);
-        },"lastLogin"]);
+        $query = $this->where($where)->select($this->detail);
         return $query;
     }
 }

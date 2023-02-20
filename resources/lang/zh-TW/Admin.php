@@ -68,6 +68,7 @@ return [
         'deleteSuccess'        =>  '刪除成功',
     ],
     'systemLogin'   =>  '系統登入',
+    'systemManager' =>  '系統管理',
     /* T */
     /* U */
 

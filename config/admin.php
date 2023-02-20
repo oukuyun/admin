@@ -36,12 +36,12 @@ return [
     'route' =>  [
         //系統管理
         'Backend.system'  =>  [
-            'name'  =>  '系統管理',
+            'name'  =>  'admin::Admin.systemManager',
             'icon'  =>  'fa fa-wrench',
             'children'  =>  [
                 //系統設定
                 'Backend.admin'  =>  [
-                    'name'  =>  '管理員管理',
+                    'name'  =>  'admin::Admin.adminManger',
                     'permission'    =>  [
                         'index',
                         'update',
@@ -49,5 +49,5 @@ return [
                 ],
             ]
         ]
-    ],
+    ]
 ];

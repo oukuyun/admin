@@ -56,7 +56,8 @@
                 className: "text-md-center",
                 render: (data, type, full, meta) => {
                     return meta.row + 1 + meta.settings._iDisplayStart;
-                }
+                },
+                searchable:false,
             },
             {
                 data: "email",
@@ -67,20 +68,21 @@
                 className: "text-md-center"
             },
             {
-                data: function(data){
-                    let time = new Date((data.last_login??{}).login_at??"");
-                    return (time != "Invalid Date")?TimeFormat(time):"";
-                },
-                className: "text-md-center"
+                data: 'last_login_time',
+                className: "text-md-center",
+                orderable:false,
+                searchable:false,
             },
-            {   data: function(data){
-                    return (data.info.find(item => item.key == "login_count")??new Object()).value??"0";
-                },
-                className: "text-md-center"
+            {   data: 'login_count',
+                className: "text-md-center",
+                orderable:false,
+                searchable:false,
             },
             {
                 data: "id",
                 className: "text-md-center",
+                orderable:false,
+                searchable:false,
                 render:(data,type,row,meta) => {
                     return `<span class="form-switch">
                                 <input class="form-check-input status" type="checkbox" ${((row.status)?'checked':'')} data-id="${data}">
@@ -90,12 +92,18 @@
             {
                 data: "id",
                 className: "text-md-center",
+                orderable:false,
+                searchable:false,
                 render: (data,type,row,meta) => {
                     return `<a href="{{route('Backend.admin.index',[],false)}}/${data}/edit" class="fs-3"><i class="fa fa-edit" ></i></a>`;
                 }
             },
         ],
         function(){
+        },
+        {
+            ordering:true,
+            order:[[0,'asc']]
         }
     );
 
