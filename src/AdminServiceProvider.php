@@ -39,6 +39,9 @@ class AdminServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/authentication-log.php', 'authentication-log');
         $this->mergeConfigFrom(__DIR__.'/../config/captcha.php', 'captcha');
         $this->mergeConfigFrom(__DIR__.'/../config/datatables.php', 'datatables');
+        config(['auth.guards'=>array_merge(config('auth.guards'),config('admin.guards'))]);
+        config(['auth.providers'=>array_merge(config('auth.providers'),config('admin.providers'))]);
+        config(['auth.passwords'=>array_merge(config('auth.passwords'),config('admin.passwords'))]);
         App::setLocale(config('admin.locale'));
         App::setFallbackLocale(config('admin.locale'));
 

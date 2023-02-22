@@ -48,9 +48,6 @@ class Init
      */
     public function handle(Request $request, Closure $next)
     {
-        config(['auth.guards'=>array_merge(config('auth.guards'),config('admin.guards'))]);
-        config(['auth.providers'=>array_merge(config('auth.providers'),config('admin.providers'))]);
-        config(['auth.passwords'=>array_merge(config('auth.passwords'),config('admin.passwords'))]);
         config(['auth.defaults.guard'=>'admin']);
         config(['auth.defaults.passwords'=>'admin_users']);
         if(!$this->SettingsService->CheckInit() && !in_array(Route::currentRouteName(),$this->IgnoreInitRoute)) {
