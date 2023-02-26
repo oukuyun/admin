@@ -28,6 +28,15 @@
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
+                        @case('ckeditor5')
+                        <x-backend::ckeditor5 
+                            :text="$fields[$sub_item['field']]['text']" 
+                            :name="$fields[$sub_item['field']]['name']" 
+                            :placeholder="$fields[$sub_item['field']]['placeholder']"
+                            :required="$fields[$sub_item['field']]['required']??false"
+                            :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                        @break
                         @case('input')
                         <x-backend::input 
                             :tag="$fields[$sub_item['field']]['tag']" 
@@ -38,9 +47,6 @@
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
-                        @break
-                        @case('selector')
-                        <x-location::selector :levels="$fields[$sub_item['field']]['levels']"/>
                         @break
                     @endswitch
                 @endif
