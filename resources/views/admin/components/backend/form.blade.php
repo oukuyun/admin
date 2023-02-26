@@ -1,4 +1,4 @@
-<form action="{{$form['action']}}" method="POST" name="{{$form['name']}}">
+<form action="{{$form['action']}}" method="POST" name="{{$form['name']}}" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="{{$form['method']}}">
     @csrf
     @foreach($form['form'] as $row)

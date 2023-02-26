@@ -9,6 +9,7 @@
                     @switch($fields[$sub_item['field']]['tag'])
                         @case('select')
                         <x-backend::select 
+                            :children="($fields[$sub_item['field']]['children']??[])" 
                             :options="$fields[$sub_item['field']]['options']" 
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
@@ -16,6 +17,15 @@
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :multiple="($fields[$sub_item['field']]['multiple']??false)"
+                            :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                        @break
+                        @case('textarea')
+                        <x-backend::textarea 
+                            :text="$fields[$sub_item['field']]['text']" 
+                            :name="$fields[$sub_item['field']]['name']" 
+                            :placeholder="$fields[$sub_item['field']]['placeholder']"
+                            :required="$fields[$sub_item['field']]['required']??false"
+                            :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('input')
@@ -28,6 +38,9 @@
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                        @break
+                        @case('selector')
+                        <x-location::selector :levels="$fields[$sub_item['field']]['levels']"/>
                         @break
                     @endswitch
                 @endif

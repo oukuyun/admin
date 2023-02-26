@@ -4,7 +4,7 @@ namespace Oukuyun\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 
-class Select extends Component
+class Textarea extends Component
 {
     public $text;
     public $placeholder;
@@ -12,15 +12,12 @@ class Select extends Component
     public $value;
     public $required;
     public $disabled;
-    public $options;
-    public $multiple;
-    public $children;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($text,$placeholder,$name,$options,$children,$multiple=false,$value = '',$required = false,$disabled = false)
+    public function __construct($text,$placeholder,$name,$value = '',$required = false,$disabled = false)
     {
         $this->name = $name;
         $this->value= $value;
@@ -28,9 +25,6 @@ class Select extends Component
         $this->text = $text;
         $this->placeholder = $placeholder;
         $this->disabled = $disabled;
-        $this->options = $options;
-        $this->multiple = $multiple;
-        $this->children = $children;
     }
 
     /**
@@ -40,6 +34,6 @@ class Select extends Component
      */
     public function render()
     {
-        return view('admin::components.backend.select');
+        return view("admin::components.backend.textarea");
     }
 }
