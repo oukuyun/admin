@@ -48,6 +48,17 @@
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
+                        @case('fileUpload')
+                        <x-backend::fileUpload 
+                            :tag="$fields[$sub_item['field']]['tag']" 
+                            :type="$fields[$sub_item['field']]['type']" 
+                            :text="$fields[$sub_item['field']]['text']" 
+                            :name="$fields[$sub_item['field']]['name']" 
+                            :placeholder="$fields[$sub_item['field']]['placeholder']"
+                            :required="$fields[$sub_item['field']]['required']??false"
+                            :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                        @break
                     @endswitch
                 @endif
             @endforeach

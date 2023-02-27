@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css')}}">
         <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/select2/css/select2.min.css')}}">
         <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/sweetalert2/sweetalert2.min.css')}}">
+        <link href="{{asset(Universal::version('backend/assets/js/plugins/jquery.filer/css/jquery.filer.css'))}}" rel="stylesheet" />
+        <link href="{{asset(Universal::version('backend/assets/js/plugins/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css'))}}" rel="stylesheet" />
         <link rel="stylesheet" id="css-main" href="{{asset(Universal::version('backend/assets/css/codebase.min.css'))}}">
   </head>
 
@@ -249,10 +251,13 @@
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/'.__('admin::Admin.jquery-validation')))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery.filer/js/jquery.filer.min.js'))}}"></script>
         <script>
             var error_lang = @json(__('admin::Admin.error'));
             var pagination_lang = @json(__('admin::pagination'));
         </script>
+        
+        <script src="{{asset(Universal::version('backend/assets/js/upload.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/ajax.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/common.js'))}}"></script>
         @stack('javascript')
