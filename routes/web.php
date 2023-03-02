@@ -23,6 +23,14 @@ Route::middleware(['admin','admin.init'])->prefix('backend')->name('Backend.')->
         // 'admin.admin',
     //     // 'admin.lockScreen'
     ])->group(function () {
+        Route::prefix('media')->name('media.')->group(function(){
+            /* 圖片庫 */
+            Route::resource('image', 'Media\ImagesController');
+            /* 上傳圖片 */
+            // Route::post('media/upload', 'Media\UploadController@store')->name('media.upload');
+        });
+        
+
         /* 儀錶板 */
         Route::resource('dashboard', 'System\DashboardController');
         /* 變更密碼 */
@@ -31,8 +39,10 @@ Route::middleware(['admin','admin.init'])->prefix('backend')->name('Backend.')->
         Route::resource('logout', 'Auth\LogoutController');
         /* 管理員管理 */
         Route::resource('admin', 'Admin\UsersController');
-    //     // /* 管理人員列表 */
-    //     // Route::resource('Users', 'Admin\UsersController');
+
+        
+
+        
     //     // /* 管理人員登入紀錄 */
     //     // Route::resource('LoginRecord', 'Admin\LoginRecordController', ['only' => ['show', 'index']]);
     //     // /* 管理人員操作紀錄 */

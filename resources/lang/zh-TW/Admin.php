@@ -30,8 +30,10 @@ return [
     'change'            =>  '變更',
     'changePassword'    =>  '變更密碼',
     'createYourWebSite' =>  '建立屬於你自己的網站',
+    'confirm'           =>  '確定',
+    'close'             =>  '關閉',
     /* D */
-
+    'delete'    =>  '刪除',
     /* E */
     'error' =>  [
         'accountOrPasswordError'    =>  '帳號或密碼錯誤',
@@ -39,6 +41,7 @@ return [
         'insertFail'        =>  '新增失敗',
         'updateFail'        =>  '更新失敗',
         'deleteFail'        =>  '刪除失敗',
+        'uploadFail'        =>  '上傳失敗',
         'serverError'       =>  '系統錯誤，請聯繫技術人員',
     ],
 
@@ -56,6 +59,7 @@ return [
     'loginTimes'    =>  '登入次數',
     'logout'=>  '登出',
     /* M */
+    'imageLibrary'  =>  '圖片庫',
     /* O */
     'operate'   =>  '操作',
     /* P */
@@ -66,10 +70,16 @@ return [
         'insertSuccess'        =>  '新增成功',
         'updateSuccess'        =>  '更新成功',
         'deleteSuccess'        =>  '刪除成功',
+        'uploadSuccess'        =>  '上傳成功',
     ],
     'systemLogin'   =>  '系統登入',
     'systemManager' =>  '系統管理',
     /* T */
+    'tempUpload'    =>  [
+        'file'  =>  '檔案',
+    ],
     /* U */
+    /* V */
+    'view'  =>  '查看',
 
 ];

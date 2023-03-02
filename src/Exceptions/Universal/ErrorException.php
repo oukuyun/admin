@@ -3,7 +3,7 @@
 namespace Oukuyun\Admin\Exceptions\Universal;
 
 use Illuminate\Http\Request;
-use Oukuyun\Admin\Http\Responses\ApiResponse;
+use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
 
 class ErrorException extends BaseException
 {

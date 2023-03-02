@@ -16,9 +16,33 @@
         <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css')}}">
         <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/select2/css/select2.min.css')}}">
         <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/sweetalert2/sweetalert2.min.css')}}">
-        <link href="{{asset(Universal::version('backend/assets/js/plugins/jquery.filer/css/jquery.filer.css'))}}" rel="stylesheet" />
-        <link href="{{asset(Universal::version('backend/assets/js/plugins/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css'))}}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/magnific-popup/magnific-popup.css')}}">
         <link rel="stylesheet" id="css-main" href="{{asset(Universal::version('backend/assets/css/codebase.min.css'))}}">
+        <style>
+            .upload-input {
+                height:100%;
+                width:100%;
+                opacity: 0;
+                position: absolute;
+                z-index: 1;
+            }
+            .upload-button {
+                border: 3px;
+                border-style: dashed;
+                height: 200px;
+                border-color: #bdbfc1;
+                position: relative;
+            }
+            .upload-button i {
+                position: absolute;
+                left: 0;
+                right: 0;
+                text-align: center;
+                color: #bdbfc1;
+                top: calc(50% - 14px);
+            }
+        </style>
+        @stack('style')
   </head>
 
   <body>
@@ -240,6 +264,42 @@
                 </div>
             </footer> -->
             <!-- END Footer -->
+            <div class="modal fade" id="media-popout" tabindex="-1" role="dialog" aria-labelledby="media-popout" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog modal-dialog-popout modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="block block-rounded shadow-none mb-0">
+                            <div class="block-header block-header-default">
+                            <h3 class="block-title">{{__('admin::Admin.imageLibrary')}}</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                            </div>
+                            <div class="block-content fs-sm py-3 upload-area">
+                                <div class="row items-push js-gallery js-gallery-enabled">
+                                    <div class="col-3" id="upload-item">
+                                        <form action="" id="upload-form">
+                                            <div class="upload-button image">
+                                                <input type="file" name="file" class="upload-input" id="upload-input">
+                                                <i class="fa fa-2x fa-circle-plus"></i>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-content block-content-full block-content-sm text-end border-top">
+                                <button type="button" class="btn btn-alt-primary" data-bs-dismiss="modal">
+                                    {{__('admin::Admin.confirm')}}
+                                </button>
+                                <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                                    {{__('admin::Admin.close')}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     <!-- END Page Container -->
         <script src="{{asset(Universal::version('backend/assets/js/codebase.app.min.js'))}}"></script>
@@ -251,7 +311,7 @@
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/localization/'.__('admin::Admin.jquery-validation')))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js'))}}"></script>
-        <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery.filer/js/jquery.filer.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js'))}}"></script>
         <script>
             var error_lang = @json(__('admin::Admin.error'));
             var pagination_lang = @json(__('admin::pagination'));
@@ -260,6 +320,59 @@
         <script src="{{asset(Universal::version('backend/assets/js/upload.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/ajax.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/common.js'))}}"></script>
+        <script>
+            function makeGallery(image) {
+                return `
+                            <div class="col-md-6 col-lg-4 col-xl-3 animated fadeIn upload-image" id="image_${image.id}">
+                                <div class="options-container fx-item-zoom-in fx-overlay-slide-down">
+                                    <img class="img-fluid options-item" src="${image.url}" alt="">
+                                    <div class="options-overlay bg-black-75">
+                                    <div class="options-overlay-content">
+                                        <h3 class="h4 text-white mb-1">${image.filename}.${image.extension}</h3>
+                                        <a class="btn btn-sm btn-alt-danger upload-image-delete" href="javascript:void(0)" data-id="${image.id}">
+                                            <i class="fa fa-trash opacity-50 me-1"></i>{{__('admin::Admin.delete')}}
+                                        </a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+            }
+            $(document).on('click','.upload-image-delete',function(){
+                var id = $(this).data('id');
+                Swal.fire({
+                    title:'確定要刪除?',
+                    icon:'warning',
+                    showCancelButton: true, 
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確定',
+                    cancelButtonText: '取消',
+                }).then(function(result){
+                    if(result.isConfirmed) {
+                        sendApi('{{route('Backend.media.image.index',[],false)}}/'+id,'DELETE',{},function(result){
+                            $(`#image_${id}`).remove();
+                        });
+                    }
+                })
+            });
+            $(`#media-popout`).on('show.bs.modal',function(){
+                $('.upload-image').remove();
+                sendApi('{{route('Backend.media.image.index',[],false)}}','GET',{},function(result){
+                    result.data.map((item) => {
+                        $('#media-popout .row').append(makeGallery(item));
+                    })
+                    $('.img-lightbox').magnificPopup({type:'image'});
+                });
+            });
+            $('#upload-input').change(function(){
+                sendApi('{{route('Backend.media.image.store',[],false)}}','POST',new FormData($(`#upload-form`)[0]),function(result){
+                    $('#upload-item').after(makeGallery(result.data.image));
+                });
+                
+            });
+            Codebase.helpersOnLoad(['jq-magnific-popup']);
+        </script>
         @stack('javascript')
     </body>
 </html>

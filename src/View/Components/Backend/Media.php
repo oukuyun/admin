@@ -4,7 +4,7 @@ namespace Oukuyun\Admin\View\Components\Backend;
 
 use Illuminate\View\Component;
 
-class FileUpload extends Component
+class Media extends Component
 {
     public $tag;
     public $type;
