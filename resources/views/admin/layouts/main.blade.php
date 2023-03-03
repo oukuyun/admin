@@ -391,8 +391,15 @@
                     }
                 })
             }).on('click','.upload-image input',function(){
-                $('.upload-image .options-container').removeClass('image-check');
-                $(this).parents('.options-container').addClass('image-check');
+                let container = $(this).parents('.options-container');
+                if(container.hasClass('image-check')) {
+                    $('.upload-image .options-container').removeClass('image-check');
+                    $(this).prop('checked', false);
+                }else{
+                    $('.upload-image .options-container').removeClass('image-check');
+                    $(this).parents('.options-container').addClass('image-check');
+                }
+                
             });
             $(`#media-popout`).on('show.bs.modal',function(){
                 $('.upload-image').remove();

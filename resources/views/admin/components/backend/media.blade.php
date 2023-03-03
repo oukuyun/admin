@@ -1,12 +1,13 @@
 <div class="mb-4">
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     <input 
-        type="hidden" 
+        type="text" 
         id="{{$name}}" 
         name="{{$name}}" 
         value="{{$value}}" 
         @if($required) required @endif 
         multiple="{{$multiple}}"
+        style="width:0;height:0;border:0;outline:0;"
     >
     @if(!$disabled)
     <button type="button" class="open_media mb-2" data-name="{{$name}}"><i class="far fa-folder-open" ></i></button>
