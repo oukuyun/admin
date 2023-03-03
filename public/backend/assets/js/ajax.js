@@ -151,6 +151,8 @@ function makeDataTable(element, path, method, data, columns, drawCallback, order
             }
         },
         drawCallback: drawCallback,
+        stateSave: true,
+        stateDuration: -1,
         columns: columns,
     });
 }

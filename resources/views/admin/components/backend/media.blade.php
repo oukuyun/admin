@@ -2,16 +2,24 @@
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     <input 
         type="hidden" 
-        class="@if($type=='checkbox') form-check-input status @else form-control @endif" 
         id="{{$name}}" 
         name="{{$name}}" 
-        @if($type=='checkbox') value="1" @else value="{{$value}}" @endif
-        placeholder="{{__($text)}}" 
-        @if($required) required @endif @if($disabled) disabled @endif 
-        @if($type=='checkbox' && $value) checked @endif
+        value="{{$value}}" 
+        @if($required) required @endif 
+        multiple="{{$multiple}}"
     >
-    <button type="button" class="open_media" data-bs-toggle="modal" data-bs-target="#media-popout"><i class="far fa-folder-open"></i></button>
-    
+    @if(!$disabled)
+    <button type="button" class="open_media mb-2" data-name="{{$name}}"><i class="far fa-folder-open" ></i></button>
+    @endif 
+    <div class="row" id="{{$name}}_image_area">
+        @if(!$multiple)
+            @if($info)
+            <div class="col-4">
+                <img src="{{$info}}" class="rounded w-100">
+            </div>
+            @endif
+        @endif
+    </div>
     @error($name)
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
@@ -19,4 +27,11 @@
 @push('style')
 @endpush
 @push('javascript')
+<script>
+    $('.open_media').click(function(){
+        media_target = $(`input[name="${$(this).data('name')}"]`);
+        media_mutiple = media_target.attr('multiple');
+        $('#media-popout').modal('show');
+    });
+</script>
 @endpush

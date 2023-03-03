@@ -19,6 +19,10 @@
         <link rel="stylesheet" href="{{asset('backend/assets/js/plugins/magnific-popup/magnific-popup.css')}}">
         <link rel="stylesheet" id="css-main" href="{{asset(Universal::version('backend/assets/css/codebase.min.css'))}}">
         <style>
+            .upload-area {
+                height: 75vh;
+                overflow: auto;
+            }
             .upload-input {
                 height:100%;
                 width:100%;
@@ -40,6 +44,23 @@
                 text-align: center;
                 color: #bdbfc1;
                 top: calc(50% - 14px);
+            }
+            .upload-image input{
+                width:100%;
+                height:100%;
+                top:0;
+                left:0;
+                opacity: 0;
+                z-index: 0;
+                cursor: pointer;
+            }
+            .upload-image-delete {
+                position: relative;
+                z-index: 1;
+            }
+            .image-check {
+                padding:3px;
+                box-shadow: 0 0 0 3px orange;
             }
         </style>
         @stack('style')
@@ -278,7 +299,7 @@
                             </div>
                             <div class="block-content fs-sm py-3 upload-area">
                                 <div class="row items-push js-gallery js-gallery-enabled">
-                                    <div class="col-3" id="upload-item">
+                                    <div class="col-3 col-md-6" id="upload-item">
                                         <form action="" id="upload-form">
                                             <div class="upload-button image">
                                                 <input type="file" name="file" class="upload-input" id="upload-input">
@@ -321,14 +342,17 @@
         <script src="{{asset(Universal::version('backend/assets/js/ajax.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/common.js'))}}"></script>
         <script>
+            var media_target;
+            var media_mutiple = false;
             function makeGallery(image) {
                 return `
                             <div class="col-md-6 col-lg-4 col-xl-3 animated fadeIn upload-image" id="image_${image.id}">
-                                <div class="options-container fx-item-zoom-in fx-overlay-slide-down">
+                                <div class="options-container fx-item-zoom-in fx-overlay-slide-down ${(media_target.val()==image.id)?'image-check':''}">
                                     <img class="img-fluid options-item" src="${image.url}" alt="">
                                     <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
                                         <h3 class="h4 text-white mb-1">${image.filename}.${image.extension}</h3>
+                                        <input name="media" type="radio" class="position-absolute" value="${image.id}" ${(media_target.val()==image.id)?'checked':''}>
                                         <a class="btn btn-sm btn-alt-danger upload-image-delete" href="javascript:void(0)" data-id="${image.id}">
                                             <i class="fa fa-trash opacity-50 me-1"></i>{{__('admin::Admin.delete')}}
                                         </a>
@@ -337,6 +361,17 @@
                                 </div>
                             </div>
                         `
+            }
+            function makeSelectImage() {
+                media_target.val($('.upload-image input:checked').val());
+                $(`#${media_target.attr('name')}_image_area`).html('');
+                $('.upload-image input:checked').each(function(){
+                    $(`#${media_target.attr('name')}_image_area`).append(`
+                        <div class="col-4">
+                            <img src="${$(`#image_${$(this).val()}`).find('img').attr('src')}" class="rounded w-100">
+                        </div>
+                    `);
+                })
             }
             $(document).on('click','.upload-image-delete',function(){
                 var id = $(this).data('id');
@@ -355,6 +390,9 @@
                         });
                     }
                 })
+            }).on('click','.upload-image input',function(){
+                $('.upload-image .options-container').removeClass('image-check');
+                $(this).parents('.options-container').addClass('image-check');
             });
             $(`#media-popout`).on('show.bs.modal',function(){
                 $('.upload-image').remove();
@@ -364,12 +402,13 @@
                     })
                     $('.img-lightbox').magnificPopup({type:'image'});
                 });
+            }).on('hide.bs.modal',function(){
+                makeSelectImage()
             });
             $('#upload-input').change(function(){
                 sendApi('{{route('Backend.media.image.store',[],false)}}','POST',new FormData($(`#upload-form`)[0]),function(result){
                     $('#upload-item').after(makeGallery(result.data.image));
                 });
-                
             });
             Codebase.helpersOnLoad(['jq-magnific-popup']);
         </script>
