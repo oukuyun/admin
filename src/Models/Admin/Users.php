@@ -7,10 +7,11 @@ use Oukuyun\Admin\Models\Universal\UserModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Yadahan\AuthenticationLog\AuthenticationLogable;
 use DB;
+use Oukuyun\Admin\Traits\QueryTrait;
 
 class Users extends UserModel
 {
-    use HasFactory, AuthenticationLogable, SoftDeletes;
+    use HasFactory, AuthenticationLogable, SoftDeletes,QueryTrait;
     protected $table = "admin_users";
     protected $fillable = [
         'name',
@@ -54,26 +55,4 @@ class Users extends UserModel
     **/
     protected $detail = ["name","email","id","status","created_at"];
 
-    /**
-     * 取得使用者資料
-     * @param string $uuid
-     * @return object
-     * @version 1.0
-     * @author Henry
-     */
-    public function getDetail(string $uuid) {
-        return $this->select($this->detail)->find($uuid);
-    }
-    
-    /**
-     * 列表SQL
-     * @param  array $where
-     * @return $query
-     * @version 1.0
-     * @author Henry
-     */
-    public function listQuery(array $where) {
-        $query = $this->where($where)->select($this->detail);
-        return $query;
-    }
 }
