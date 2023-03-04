@@ -27,10 +27,12 @@ return [
     'backendSystem'         =>  '管理後台',
 
     /* C */
+    'cancel'            =>  '取消',
     'change'            =>  '變更',
     'changePassword'    =>  '變更密碼',
     'createYourWebSite' =>  '建立屬於你自己的網站',
     'confirm'           =>  '確定',
+    'confirmDelete'     =>  "確定要刪除?",
     'close'             =>  '關閉',
     /* D */
     'delete'    =>  '刪除',

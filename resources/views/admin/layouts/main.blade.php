@@ -62,6 +62,16 @@
                 padding:3px;
                 box-shadow: 0 0 0 3px orange;
             }
+            .options-item {
+                object-fit:cover;
+                height:100%;
+            }
+            .ui-sortable img:hover {
+                cursor: grab;
+            }
+            .ui-sortable img:active,.ui-sortable img:focus {
+                cursor: grabbing;
+            }
         </style>
         @stack('style')
   </head>
@@ -299,7 +309,7 @@
                             </div>
                             <div class="block-content fs-sm py-3 upload-area">
                                 <div class="row items-push js-gallery js-gallery-enabled">
-                                    <div class="col-3 col-md-6" id="upload-item">
+                                    <div class="col-md-6 col-lg-4 col-xl-3" id="upload-item">
                                         <form action="" id="upload-form">
                                             <div class="upload-button image">
                                                 <input type="file" name="file" class="upload-input" id="upload-input">
@@ -310,7 +320,7 @@
                                 </div>
                             </div>
                             <div class="block-content block-content-full block-content-sm text-end border-top">
-                                <button type="button" class="btn btn-alt-primary" data-bs-dismiss="modal">
+                                <button type="button" class="btn btn-alt-primary" data-bs-dismiss="modal" onclick="makeSelectImage()">
                                     {{__('admin::Admin.confirm')}}
                                 </button>
                                 <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
@@ -327,6 +337,7 @@
         <script src="{{asset(Universal::version('backend/assets/js/plugins/sweetalert2/sweetalert2.min.js'))}}"></script>
         <!-- jQuery (required for Select2 + jQuery Validation plugins) -->
         <script src="{{asset(Universal::version('backend/assets/js/lib/jquery.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/lib/jquery-ui.min.js'))}}"></script>
 
         <!-- Page JS Plugins -->
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>
@@ -336,6 +347,7 @@
         <script>
             var error_lang = @json(__('admin::Admin.error'));
             var pagination_lang = @json(__('admin::pagination'));
+            var common_lang = {!!json_encode(\Arr::only(__('admin::Admin'),['confirm','cancel','confirmDelete']))!!};
         </script>
         
         <script src="{{asset(Universal::version('backend/assets/js/upload.js'))}}"></script>
@@ -344,15 +356,26 @@
         <script>
             var media_target;
             var media_mutiple = false;
+            var media_temp = [];
             function makeGallery(image) {
+                let checked = false;
+                if(!media_mutiple) {
+                   checked = media_target.val()==image.id;
+                }else {
+                    let temp = [];
+                    $(`input[name="${media_target.attr('id')}[]"]`).each(function(){
+                        temp.push(parseInt($(this).val()));
+                    });
+                    checked = ($.inArray(image.id,temp) >= 0);
+                }
                 return `
                             <div class="col-md-6 col-lg-4 col-xl-3 animated fadeIn upload-image" id="image_${image.id}">
-                                <div class="options-container fx-item-zoom-in fx-overlay-slide-down ${(media_target.val()==image.id)?'image-check':''}">
+                                <div class="options-container fx-item-zoom-in h-100 fx-overlay-slide-down ${(checked)?'image-check':''}">
                                     <img class="img-fluid options-item" src="${image.url}" alt="">
                                     <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
                                         <h3 class="h4 text-white mb-1">${image.filename}.${image.extension}</h3>
-                                        <input name="media" type="radio" class="position-absolute" value="${image.id}" ${(media_target.val()==image.id)?'checked':''}>
+                                        <input name="media${media_mutiple?'[]':''}" type="${media_mutiple?'checkbox':'radio'}" class="position-absolute" value="${image.id}" ${(checked)?'checked':''}>
                                         <a class="btn btn-sm btn-alt-danger upload-image-delete" href="javascript:void(0)" data-id="${image.id}">
                                             <i class="fa fa-trash opacity-50 me-1"></i>{{__('admin::Admin.delete')}}
                                         </a>
@@ -364,25 +387,27 @@
             }
             function makeSelectImage() {
                 media_target.val($('.upload-image input:checked').val());
-                $(`#${media_target.attr('name')}_image_area`).html('');
+                $(`#${media_target.attr('id')}_image_area`).html('');
                 $('.upload-image input:checked').each(function(){
-                    $(`#${media_target.attr('name')}_image_area`).append(`
-                        <div class="col-4">
+                    $(`#${media_target.attr('id')}_image_area`).append(`
+                        <div class="col-4 mb-2">
+                            ${(media_mutiple)?`<input type="hidden" name="${media_target.attr('id')}[]" value="${$(this).val()}">`:``}
                             <img src="${$(`#image_${$(this).val()}`).find('img').attr('src')}" class="rounded w-100">
                         </div>
                     `);
                 })
+                $(`#${media_target.attr('id')}_image_area`).sortable();
             }
             $(document).on('click','.upload-image-delete',function(){
                 var id = $(this).data('id');
                 Swal.fire({
-                    title:'確定要刪除?',
+                    title: common_lang.confirmDelete,
                     icon:'warning',
                     showCancelButton: true, 
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: '確定',
-                    cancelButtonText: '取消',
+                    confirmButtonText: common_lang.confirm,
+                    cancelButtonText: common_lang.cancel,
                 }).then(function(result){
                     if(result.isConfirmed) {
                         sendApi('{{route('Backend.media.image.index',[],false)}}/'+id,'DELETE',{},function(result){
@@ -393,13 +418,13 @@
             }).on('click','.upload-image input',function(){
                 let container = $(this).parents('.options-container');
                 if(container.hasClass('image-check')) {
-                    $('.upload-image .options-container').removeClass('image-check');
                     $(this).prop('checked', false);
-                }else{
-                    $('.upload-image .options-container').removeClass('image-check');
-                    $(this).parents('.options-container').addClass('image-check');
                 }
-                
+                $('.upload-image .options-container').removeClass('image-check');
+                $('.upload-image input:checked').each(function(){
+                    $(this).parents('.options-container').addClass('image-check');
+                })
+                media_temp.push($(this).val());
             });
             $(`#media-popout`).on('show.bs.modal',function(){
                 $('.upload-image').remove();
@@ -410,7 +435,7 @@
                     $('.img-lightbox').magnificPopup({type:'image'});
                 });
             }).on('hide.bs.modal',function(){
-                makeSelectImage()
+                
             });
             $('#upload-input').change(function(){
                 sendApi('{{route('Backend.media.image.store',[],false)}}','POST',new FormData($(`#upload-form`)[0]),function(result){

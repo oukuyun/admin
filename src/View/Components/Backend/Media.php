@@ -15,12 +15,13 @@ class Media extends Component
     public $disabled;
     public $info;
     public $multiple;
+    public $id;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($tag,$type,$text,$name,$info,$value = '',$multiple = false,$required = false,$disabled = false)
+    public function __construct($tag,$type,$text,$name,$info,$id,$value = '',$multiple = false,$required = false,$disabled = false)
     {
         $this->tag = $tag;
         $this->type = $type;
@@ -31,6 +32,7 @@ class Media extends Component
         $this->disabled = $disabled;
         $this->info = $info;
         $this->multiple = $multiple;
+        $this->id = $id;
     }
 
     /**

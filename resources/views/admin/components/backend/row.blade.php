@@ -55,21 +55,12 @@
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
                             :info="$fields[$sub_item['field']]['info']"
+                            :multiple="$fields[$sub_item['field']]['multiple']??false"
+                            :id="$sub_item['field']"
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
-                        @break
-                        @case('fileUpload')
-                        <x-backend::fileUpload 
-                            :tag="$fields[$sub_item['field']]['tag']" 
-                            :type="$fields[$sub_item['field']]['type']" 
-                            :text="$fields[$sub_item['field']]['text']" 
-                            :name="$fields[$sub_item['field']]['name']" 
-                            :info="$fields[$sub_item['field']]['info']"
-                            :placeholder="$fields[$sub_item['field']]['placeholder']"
-                            :required="$fields[$sub_item['field']]['required']??false"
-                            :disabled="($fields[$sub_item['field']]['disabled']??false)" />
                         @break
                     @endswitch
                 @endif
