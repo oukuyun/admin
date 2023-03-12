@@ -14,6 +14,9 @@
         </div>
     </div>
 </form>
+<div id="template_area" class="d-none">
+@stack('template')    
+</div>
 @push('javascript')
 <script>
     Codebase.onLoad((
@@ -25,7 +28,7 @@
                     submitHandler: function() {
                         Codebase.block('state_toggle','.block-rounded');
                         return true;
-                    }
+                    },
                 })
             }
             static init(){

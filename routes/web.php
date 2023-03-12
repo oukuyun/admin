@@ -26,6 +26,8 @@ Route::middleware(['admin','admin.init'])->prefix('backend')->name('Backend.')->
         Route::prefix('media')->name('media.')->group(function(){
             /* 圖片庫 */
             Route::resource('image', 'Media\ImagesController');
+            /* 圖片庫 */
+            Route::resource('ckeditor', 'Media\CkeditorUploadController');
             /* 上傳圖片 */
             // Route::post('media/upload', 'Media\UploadController@store')->name('media.upload');
         });

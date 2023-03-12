@@ -362,11 +362,7 @@
                 if(!media_mutiple) {
                    checked = media_target.val()==image.id;
                 }else {
-                    let temp = [];
-                    $(`input[name="${media_target.attr('id')}[]"]`).each(function(){
-                        temp.push(parseInt($(this).val()));
-                    });
-                    checked = ($.inArray(image.id,temp) >= 0);
+                    checked = ($.inArray(image.id,media_temp) >= 0);
                 }
                 return `
                             <div class="col-md-6 col-lg-4 col-xl-3 animated fadeIn upload-image" id="image_${image.id}">
@@ -388,11 +384,11 @@
             function makeSelectImage() {
                 media_target.val($('.upload-image input:checked').val());
                 $(`#${media_target.attr('id')}_image_area`).html('');
-                $('.upload-image input:checked').each(function(){
+                media_temp.map((item) => {
                     $(`#${media_target.attr('id')}_image_area`).append(`
                         <div class="col-4 mb-2">
-                            ${(media_mutiple)?`<input type="hidden" name="${media_target.attr('id')}[]" value="${$(this).val()}">`:``}
-                            <img src="${$(`#image_${$(this).val()}`).find('img').attr('src')}" class="rounded w-100">
+                            ${(media_mutiple)?`<input type="hidden" name="${media_target.attr('id')}[]" value="${item}">`:``}
+                            <img src="${$(`#image_${item}`).find('img').attr('src')}" class="rounded w-100">
                         </div>
                     `);
                 })
@@ -411,20 +407,25 @@
                 }).then(function(result){
                     if(result.isConfirmed) {
                         sendApi('{{route('Backend.media.image.index',[],false)}}/'+id,'DELETE',{},function(result){
+                            delete media_temp[$.inArray(id,media_temp)];
                             $(`#image_${id}`).remove();
+                            makeSelectImage();
                         });
                     }
                 })
             }).on('click','.upload-image input',function(){
                 let container = $(this).parents('.options-container');
                 if(container.hasClass('image-check')) {
+                    delete media_temp[$.inArray(parseInt($(this).val()),media_temp)];
                     $(this).prop('checked', false);
+                }else{
+                    media_temp.push($(this).val());
                 }
                 $('.upload-image .options-container').removeClass('image-check');
                 $('.upload-image input:checked').each(function(){
                     $(this).parents('.options-container').addClass('image-check');
                 })
-                media_temp.push($(this).val());
+                
             });
             $(`#media-popout`).on('show.bs.modal',function(){
                 $('.upload-image').remove();

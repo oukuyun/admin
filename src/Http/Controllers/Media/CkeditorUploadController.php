@@ -3,18 +3,18 @@
 namespace Oukuyun\Admin\Http\Controllers\Media;
 
 use App\Http\Controllers\Controller;
-use Spatie\MediaLibrary\MediaCollections\FileAdderFactory;
 use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
-use Oukuyun\Admin\Http\Requests\Media\TempUploadRequest;
+use Oukuyun\Admin\Services\Media\ImageService;
+use Oukuyun\Admin\Http\Requests\Media\CkeditorUploadRequest;
 
-class UploadController extends Controller
+class CkeditorUploadController extends Controller
 {
-    // protected $FileAdderFactory;
+    protected $ImageService;
 
-    // public function __construct(FileAdderFactory $FileAdderFactory)
-    // {
-    //     $this->FileAdderFactory = $FileAdderFactory;
-    // }
+    public function __construct(ImageService $ImageService)
+    {
+        $this->ImageService = $ImageService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,10 +39,14 @@ class UploadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TempUploadRequest $request)
+    public function store(CkeditorUploadRequest $request)
     {
-        $temp = auth()->user()->addMedia(request()->file('file'))->toMediaCollection('temp');
-        return ApiResponse::json(["data"=>$temp]);
+        $image = $this->ImageService->upload($request->file('upload'));
+        return response()->json([
+            "fileName"  =>  $image->filename,
+            "uploaded"  =>  1,
+            "url"   => $image->getUrl(),
+        ]);
     }
 
     /**

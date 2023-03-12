@@ -30,7 +30,11 @@ trait QueryTrait
      * @author Henry
      */
     public function getDetail(string $id) {
-        return $this->select($this->detail)->find($id);
+        $query = $this->select($this->detail);
+        if(isset($this->withs) && $this->withs) {
+            $query = $query->with($this->withs);
+        }
+        return $query->find($id);
     }
 
     /**

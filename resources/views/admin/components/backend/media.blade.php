@@ -21,7 +21,7 @@
             @endif
         @else
             @foreach($info as $item)
-            <div class="col-4">
+            <div class="col-4 mb-2">
                 <input type="hidden" name="{{$id}}[]" value="{{$item->id}}">
                 <img src="{{$item->getUrl()}}" class="rounded w-100">
             </div>
@@ -38,9 +38,12 @@
 <script>
     $('.open_media').click(function(){
         media_target = $(`#${$(this).data('name')}`);
-        console.log(media_target.data('multiple'));
         media_mutiple = media_target.data('multiple');
         $('#media-popout').modal('show');
+        media_temp = [];
+        $(`input[name="${media_target.attr('id')}[]"]`).each(function(){
+            media_temp.push(parseInt($(this).val()));
+        });
     });
     $('#{{$id}}_image_area').sortable(); 
 </script>
