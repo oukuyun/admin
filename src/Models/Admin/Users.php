@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Oukuyun\Admin\Models\Universal\UserModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Yadahan\AuthenticationLog\AuthenticationLogable;
-use DB;
+use Spatie\Permission\Traits\HasPermissions;
 use Oukuyun\Admin\Traits\QueryTrait;
 
 class Users extends UserModel
 {
-    use HasFactory, AuthenticationLogable, SoftDeletes,QueryTrait;
+    use HasFactory, AuthenticationLogable, SoftDeletes, QueryTrait, HasPermissions;
     protected $table = "admin_users";
     protected $fillable = [
         'name',
