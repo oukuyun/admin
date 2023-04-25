@@ -34,9 +34,7 @@ class LogoutController extends Controller
      */
     public function index(Request $request)
     {
-        return ApiResponse::json([
-            "message" => "登出成功",
-            "data" => $this->UsersService->logout($request->ip(),$request->userAgent())
-        ]);
+        $this->UsersService->logout($request->ip(),$request->userAgent());
+        return redirect()->route('Backend.Login.index');
     }
 }

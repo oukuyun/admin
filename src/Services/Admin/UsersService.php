@@ -180,9 +180,9 @@ class UsersService
     public function logout(string $ip,string $userAgent) {
         $user_id    =   auth()->user()->id;
         auth()->logout();
-        if(!$result){
-            throw new ErrorException(['data'=>['error'=>__('admin::Admin.error.serverError')]],__('admin::Admin.error.serverError'),500);
-        }
+        // if(!$result){
+        //     throw new ErrorException(['data'=>['error'=>__('admin::Admin.error.serverError')]],__('admin::Admin.error.serverError'),500);
+        // }
     }
     
     /**
