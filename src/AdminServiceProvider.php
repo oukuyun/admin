@@ -39,6 +39,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/authentication-log.php', 'authentication-log');
         $this->mergeConfigFrom(__DIR__.'/../config/captcha.php', 'captcha');
         $this->mergeConfigFrom(__DIR__.'/../config/datatables.php', 'datatables');
+        $this->mergeConfigFrom(__DIR__.'/../config/permission.php', 'permission');
         config(['auth.guards'=>array_merge(config('auth.guards'),config('admin.guards'))]);
         config(['auth.providers'=>array_merge(config('auth.providers'),config('admin.providers'))]);
         config(['auth.passwords'=>array_merge(config('auth.passwords'),config('admin.passwords'))]);
@@ -89,6 +90,10 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/datatables.php' => config_path('datatables.php'),
+        ], 'admin-config');
+
+        $this->publishes([
+            __DIR__.'/../config/permission.php' => config_path('permission.php'),
         ], 'admin-config');
 
         $this->publishes([
