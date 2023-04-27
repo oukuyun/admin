@@ -59,4 +59,18 @@ class Users extends UserModel
     **/
     protected $detail = ["name","email","id","status","created_at"];
 
+    /**
+     * 列表SQL
+     * @param  array $where
+     * @return $query
+     * @version 1.0
+     * @author Henry
+     */
+    public function listQuery(array $where) {
+        $query = parent::listQuery($where)->whereDoesntHave('info', function($query) {
+            $query->where('key','type')->where('value','admin');
+        });
+        return $query;
+    }
+
 }
