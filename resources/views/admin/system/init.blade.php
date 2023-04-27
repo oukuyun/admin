@@ -36,7 +36,7 @@
                         <!-- jQuery Validation functionality is initialized with .js-validation-signin class in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js -->
                             <form class="js-validation-signin" action="{{route('Backend.Init.store')}}" method="POST" name="init">
                                 <h3>{{__('admin::Admin.account')}}</h3>
-                                <input type="hidden" name="type" value="admin">
+                                <input type="hidden" name="admin[type]" value="admin">
                                 <div class="row g-sm mb-4">
                                     <div class="col-12 mb-4">
                                         <label class="form-label" for="email">{{__('admin::Admin.admin.email')}}<span class="text-danger">*</span></label>

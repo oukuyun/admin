@@ -35,6 +35,10 @@ class Users extends UserModel
         return $this->info->pluck('value','key')['login_count']??0;
     }
 
+    public function getTypeAttribute() {
+        return $this->info->pluck('value','key')['type']??"";
+    }
+
     public function getLastLoginTimeAttribute() {
         return ($this->lastLogin)?$this->lastLogin->login_at->toDateTimeString():'';
     }
