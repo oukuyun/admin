@@ -13,5 +13,8 @@ class Universal
 			return $file;
 		}
 	}
+
+	static function permissionEnable() {
+		return (class_exists('Oukuyun\Permission\PermissionServiceProvider') && config('admin.permission'));
+	}
 }
-	

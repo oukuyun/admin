@@ -49,5 +49,7 @@ return [
                 ],
             ]
         ]
-    ]
+    ],
+
+    'permission'   =>  env('ADMIN_PERMISSION',false),
 ];

@@ -25,6 +25,7 @@ return [
     /* B */
     'back'          =>  '返回',
     'backendSystem'         =>  '管理後台',
+    'backToDashboard'   =>  '返回後台',
 
     /* C */
     'cancel'            =>  '取消',
@@ -65,6 +66,7 @@ return [
     /* O */
     'operate'   =>  '操作',
     /* P */
+    'pleaseContactSystemManager'  =>  '請聯繫系統管理員',
     /* S */
     'sent'      =>  '送出',
     'status'        =>  '狀態',
@@ -81,6 +83,7 @@ return [
         'file'  =>  '檔案',
     ],
     /* U */
+    'unauthorized'  =>  '沒有授權權限',
     /* V */
     'view'  =>  '查看',
 

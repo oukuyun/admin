@@ -7,11 +7,12 @@ use Oukuyun\Admin\Models\Universal\UserModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Yadahan\AuthenticationLog\AuthenticationLogable;
 use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 use Oukuyun\Admin\Traits\QueryTrait;
 
 class Users extends UserModel
 {
-    use HasFactory, AuthenticationLogable, SoftDeletes, QueryTrait, HasPermissions;
+    use HasFactory, AuthenticationLogable, SoftDeletes, QueryTrait, HasPermissions, HasRoles;
     protected $table = "admin_users";
     protected $fillable = [
         'name',
@@ -47,8 +48,8 @@ class Users extends UserModel
         return $this->hasOne('Yadahan\AuthenticationLog\AuthenticationLog','authenticatable_id')->orderBy('login_at', 'desc')->select('authenticatable_id','login_at');
     }
 
-    public function isSuperAdmin(){
-        return $this->hasOne(UsersInfo::class,'user_id','id')->where("key","=","type")->first()->value==1;
+    public function getIsSuperAdminAttribute(){
+        return $this->type == 'admin';
     }
 
     /** 

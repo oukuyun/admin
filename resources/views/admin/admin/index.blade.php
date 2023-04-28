@@ -44,6 +44,7 @@
 <script src="{{asset('backend/assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
 <script>
     var url = "{{route('Backend.admin.index',[],false)}}";
+    var permission = @json(Universal::permissionEnable());
     var search = makeDataTable(
         "#datatable",
         url,
@@ -95,7 +96,11 @@
                 orderable:false,
                 searchable:false,
                 render: (data,type,row,meta) => {
-                    return `<a href="{{route('Backend.admin.index',[],false)}}/${data}/edit" class="fs-3"><i class="fa fa-edit" ></i></a>`;
+                    let str = `<a href="{{route('Backend.admin.index',[],false)}}/${data}/edit" class="fs-3"><i class="fa fa-edit" ></i></a>`;
+                    if(permission) {
+                        str += `<a href="{{route('Backend.permission.index',[],false)}}/${data}/edit" class="fs-3 ms-3 text-warning"><i class="fa-solid fa-shield-halved"></i></a>`;
+                    }
+                    return str;
                 }
             },
         ],

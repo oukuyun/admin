@@ -7,11 +7,8 @@ use Oukuyun\Admin\Models\Admin\UsersInfo;
 use Illuminate\Support\Arr;
 use Oukuyun\Admin\Exceptions\Universal\ErrorException;
 use Illuminate\Support\Facades\Hash;
-use Yadahan\AuthenticationLog\AuthenticationLog;
-use Illuminate\Support\Carbon;
 use Auth;
 use DataTables;
-use Oukuyun\Admin\Events\Auth\Login;
 
 /**
  * Class UsersService.
@@ -222,6 +219,19 @@ class UsersService
         if(!$result){
             throw new ErrorException(['data' => ['error' => __('admin::Admin.error.updateFail')]],__('admin::Admin.error.updateFail'),500);
         }
+    }
+
+    /**
+     * 變更權限
+     *
+     * @param  mixed $data
+     * @param  mixed $id
+     * @return void
+     */
+    public function updatePermission(array $data, string $id) {
+        $updateData = Arr::only($data,['permissions']);
+        $user = $this->UsersRepository->find($id);
+        $user->syncPermissions($updateData);
     }
 
 }
