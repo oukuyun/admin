@@ -48,6 +48,16 @@
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
+                        @case('checkbox')
+                        <x-backend::checkbox 
+                            :tag="$fields[$sub_item['field']]['tag']" 
+                            :text="$fields[$sub_item['field']]['text']" 
+                            :name="$fields[$sub_item['field']]['name']" 
+                            :required="$fields[$sub_item['field']]['required']??false"
+                            :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :checked="($fields[$sub_item['field']]['checked']??false)"
+                            :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                        @break
                         @case('media')
                         <x-backend::media 
                             :tag="$fields[$sub_item['field']]['tag']" 
