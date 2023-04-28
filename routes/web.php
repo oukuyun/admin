@@ -12,17 +12,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware(['admin','admin.init'])->prefix('backend')->name('Backend.')->namespace('Oukuyun\Admin\Http\Controllers')->group(function(){
+Route::middleware(['admin'])->prefix('backend')->name('Backend.')->namespace('Oukuyun\Admin\Http\Controllers')->group(function(){
     /* 初始化設定 */
     Route::resource('Init', 'System\InitController');
 	/*管理員登入*/
     Route::resource('Login', 'Auth\LoginController');
 
-    Route::middleware([
+    $middleware = [
         'admin.auth',
-        // 'admin.admin',
-    //     // 'admin.lockScreen'
-    ])->group(function () {
+    ];
+
+    Route::middleware($middleware)->group(function () {
         Route::prefix('media')->name('media.')->group(function(){
             /* 圖片庫 */
             Route::resource('image', 'Media\ImagesController');

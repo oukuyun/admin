@@ -63,6 +63,7 @@ class AdminServiceProvider extends ServiceProvider
         $router->pushMiddlewareToGroup('admin',  \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class);
         $router->pushMiddlewareToGroup('admin', \Illuminate\View\Middleware\ShareErrorsFromSession::class);
         $router->pushMiddlewareToGroup('admin', \Illuminate\Routing\Middleware\SubstituteBindings::class);
+        $router->pushMiddlewareToGroup('admin', \Oukuyun\Admin\Http\Middleware\Init::class);
 
         $this->publishes([
             __DIR__.'/../resources/views/admin' => resource_path('views/vendor/admin'),
