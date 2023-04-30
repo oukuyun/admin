@@ -360,7 +360,7 @@
             function makeGallery(image) {
                 let checked = false;
                 if(!media_mutiple) {
-                   checked = media_target.val()==image.id;
+                    checked = media_target.val()==image.id;
                 }else {
                     checked = ($.inArray(image.id,media_temp) >= 0);
                 }
@@ -384,7 +384,13 @@
             function makeSelectImage() {
                 media_target.val($('.upload-image input:checked').val());
                 $(`#${media_target.attr('id')}_image_area`).html('');
-                media_temp.map((item) => {
+                let temp;
+                if(media_mutiple) {
+                    temp = media_temp;
+                }else {
+                    temp = [media_temp];
+                }
+                temp.map((item) => {
                     $(`#${media_target.attr('id')}_image_area`).append(`
                         <div class="col-4 mb-2">
                             ${(media_mutiple)?`<input type="hidden" name="${media_target.attr('id')}[]" value="${item}">`:``}
@@ -419,7 +425,12 @@
                     delete media_temp[$.inArray(parseInt($(this).val()),media_temp)];
                     $(this).prop('checked', false);
                 }else{
-                    media_temp.push($(this).val());
+                    if(media_mutiple) {
+                        media_temp.push($(this).val());
+                    }else {
+                        media_temp = $(this).val();
+                    }
+                    
                 }
                 $('.upload-image .options-container').removeClass('image-check');
                 $('.upload-image input:checked').each(function(){

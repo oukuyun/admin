@@ -40,7 +40,11 @@
         media_target = $(`#${$(this).data('name')}`);
         media_mutiple = media_target.data('multiple');
         $('#media-popout').modal('show');
+        @if(!$multiple)
+        media_temp = '';
+        @else
         media_temp = [];
+        @endif
         $(`input[name="${media_target.attr('id')}[]"]`).each(function(){
             media_temp.push(parseInt($(this).val()));
         });
