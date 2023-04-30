@@ -29,6 +29,7 @@
                 opacity: 0;
                 position: absolute;
                 z-index: 1;
+                cursor: pointer;
             }
             .upload-button {
                 border: 3px;
@@ -44,6 +45,23 @@
                 text-align: center;
                 color: #bdbfc1;
                 top: calc(50% - 14px);
+            }
+            .upload-image {
+                height:200px;
+                text-align:center;
+            }
+            .upload-image .fx-item-zoom-in {
+                background-color: #d9d9d9;
+            }
+            .image-check::after {
+                content: '✔';
+                position: absolute;
+                right: 15px;
+                bottom: 15px;
+                color: #fff;
+                background-color: orange;
+                border-radius: 20px;
+                padding: 10px;
             }
             .upload-image input{
                 width:100%;
