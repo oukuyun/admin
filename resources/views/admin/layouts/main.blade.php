@@ -356,6 +356,7 @@
         <!-- jQuery (required for Select2 + jQuery Validation plugins) -->
         <script src="{{asset(Universal::version('backend/assets/js/lib/jquery.min.js'))}}"></script>
         <script src="{{asset(Universal::version('backend/assets/js/lib/jquery-ui.min.js'))}}"></script>
+        <script src="{{asset(Universal::version('backend/assets/js/plugins/select2/js/select2.min.js'))}}"></script>
 
         <!-- Page JS Plugins -->
         <script src="{{asset(Universal::version('backend/assets/js/plugins/jquery-validation/jquery.validate.min.js'))}}"></script>

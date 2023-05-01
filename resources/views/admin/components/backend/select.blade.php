@@ -8,7 +8,7 @@
             @if($multiple)
                 @if(in_array($option['value'],$value)) selected @endif
             @else
-                @if($value==$option['value']) selected @endif
+                @if($value == $option['value']) selected @endif
             @endif
         >{{$option['name']}}</option>
         @endforeach
@@ -36,5 +36,6 @@
             });
         });
     @endif
+    Codebase.helpersOnLoad(['jq-select2']);
 </script>
 @endpush
