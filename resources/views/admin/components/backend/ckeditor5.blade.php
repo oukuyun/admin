@@ -9,10 +9,11 @@
 @push('javascript')
 <script src="{{asset(Universal::version('backend/assets/js/plugins/ckeditor5/ckeditor.js'))}}"></script>
 <script>
+    var {{$name}}
     ClassicEditor
     .create( document.querySelector( '#{{$name}}' ), {
         licenseKey: '',
-        removePlugins: ['Style'],
+        removePlugins: ['Style', 'Markdown'],
         simpleUpload: {
             // The URL that the images are uploaded to.
             uploadUrl: '{{route('Backend.media.ckeditor.store',[],false)}}',
@@ -34,7 +35,7 @@
         },
     } )
     .then( editor => {
-        window.editor = editor;
+        {{$name}} = editor;
     } )
     .catch( error => {
         console.error( 'Oops, something went wrong!' );
