@@ -51,7 +51,8 @@ return [
     /* F */
     'firstSetting'  =>  '初次設定',
     'finish'        =>  '完成',
-
+    /* G */
+    'generalSetting' => '一般設定',
     /* I */
     'insert'    =>  '新增',
     /* J */
@@ -69,6 +70,7 @@ return [
     'pleaseContactSystemManager'  =>  '請聯繫系統管理員',
     /* S */
     'sent'      =>  '送出',
+    'socialSetting' => '社群設定',
     'status'        =>  '狀態',
     'success'   =>  [
         'insertSuccess'        =>  '新增成功',
@@ -86,5 +88,7 @@ return [
     'unauthorized'  =>  '沒有授權權限',
     /* V */
     'view'  =>  '查看',
+    /* W */
+    'webSetting' => '網站設定',
 
 ];

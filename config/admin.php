@@ -8,7 +8,7 @@ return [
 
     'multipleLogin' => env('ADMIN_MULTIPLE_LOGIN', false),
 
-    'locale'    =>  'zh-TW',
+    'locale'    =>  'zh-Hant',
 
     'guards' => [
         'admin' => [

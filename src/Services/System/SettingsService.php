@@ -61,7 +61,7 @@ class SettingsService
     **/
     public function Init(Array $data) {
         foreach($data as $type => $value) {
-            $this->updateSetting("zh-TW",$type,$value);
+            $this->updateSetting("zh-Hant",$type,$value);
         }
     }
     
