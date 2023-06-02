@@ -1,12 +1,12 @@
 <?php
 
-namespace Dinj\Admin\Http\Controllers\System;
+namespace Oukuyun\Admin\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Dinj\Admin\Http\Responses\Universal\ApiResponse;
-use Dinj\Admin\Services\System\SettingsService;
-use Dinj\Admin\Http\Requests\System\SettingsRequest;
+use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
+use Oukuyun\Admin\Services\System\SettingsService;
+use Oukuyun\Admin\Http\Requests\System\SettingsRequest;
 
 class SettingsController extends Controller
 {
@@ -35,23 +35,32 @@ class SettingsController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->expectsJson()) {
-            return ApiResponse::json(["data" => [
-                'general'   =>  $this->SettingsService->getSettings(\App::currentLocale()),
-                'security'  =>  $this->SettingsService->getSettings("system"),
-                'service'  =>  $this->SettingsService->getSettings("service"),
-                'social'  =>  $this->SettingsService->getSettings("social"),
-                'seo'  =>  $this->SettingsService->getSettings("seo"),
-            ]]);
+        $lang = \App::currentLocale();
+        if($request->lang) {
+            $lang = $request->lang;
+            
         }
+        foreach ($this->SettingsService->getSettings($lang) as $key => $value) {
+            foreach (config('admin.settings') as $type => $item) {
+                if(isset($item['fields'][$key]) && $value) {
+                    config(["admin.settings.{$type}.fields.{$key}.value" => $value]);
+                }
+            }
+        }
+        foreach (config('admin.settings') as $type => $item) {
+            config(["admin.settings.{$type}.fields.lang.value" => $lang]);
+        }
+        \View::share('fields', config('admin.settings.general.fields'));
         return view('admin::system.settings');
     }
 
-    public function update(SettingsRequest $request, $id)
+    public function store(SettingsRequest $request)
     {
-        $this->SettingsService->updateSetting($request->type,$request->name,$request->value);
-        return ApiResponse::json([
-            "message" => "更新成功"
-        ]);
+        foreach ($request->all() as $key => $value) {
+            if(!in_array($key, ['_method', '_token', 'lang'])) {
+                $this->SettingsService->updateSetting($request->lang, $key, $value);
+            }
+        }
+        return back();
     }
 }

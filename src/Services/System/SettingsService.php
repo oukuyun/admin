@@ -50,7 +50,7 @@ class SettingsService
         $this->SettingsRepository->where([
             'lang' => $lang,
             'name' => $name,
-        ])->first()->update(['value' => $value]);
+        ])->first()?->update(['value' => $value]);
     }
 
     /**
