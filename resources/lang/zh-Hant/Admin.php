@@ -70,6 +70,15 @@ return [
     'pleaseContactSystemManager'  =>  '請聯繫系統管理員',
     /* S */
     'sent'      =>  '送出',
+    'settings'  =>  [
+        'title'     =>  '網站標題',
+        'address'   =>  '公司地址',
+        'service_time'  =>  '服務時間',
+        'fax'   =>  '傳真電話',
+        'phone' =>  '連絡電話',
+        'email' =>  'E-mail',
+        'lang'  =>  '語言',
+    ],
     'socialSetting' => '社群設定',
     'status'        =>  '狀態',
     'success'   =>  [
@@ -80,6 +89,7 @@ return [
     ],
     'systemLogin'   =>  '系統登入',
     'systemManager' =>  '系統管理',
+    'SystemSettings'    =>  '系統設定',
     /* T */
     'tempUpload'    =>  [
         'file'  =>  '檔案',

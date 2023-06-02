@@ -41,8 +41,8 @@ Route::middleware(['admin'])->prefix('backend')->name('Backend.')->namespace('Ou
         Route::resource('logout', 'Auth\LogoutController');
         /* 管理員管理 */
         Route::resource('admin', 'Admin\UsersController');
-
-        
+        /* 網站設定 */
+        Route::resource('SystemSettings', 'System\SettingsController', ['only' => ['index','store']]);
 
         
     //     // /* 管理人員登入紀錄 */
@@ -51,8 +51,7 @@ Route::middleware(['admin'])->prefix('backend')->name('Backend.')->namespace('Ou
     //     // Route::resource('OperateRecord', 'Admin\OperateRecordController', ['only' => ['show', 'index']]);
     //     // /* 管理人員螢幕鎖定 */
     //     // Route::resource('LockScreen', 'System\LockScreenController', ['only' => ['index']]);
-    //     // /* 管理人員螢幕鎖定 */
-    //     // Route::resource('SystemSettings', 'System\SettingsController', ['only' => ['index']]);
+        
     });
 });
 
