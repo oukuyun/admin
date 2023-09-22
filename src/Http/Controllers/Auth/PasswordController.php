@@ -54,7 +54,7 @@ class PasswordController extends Controller
      */
     public function store(PasswordRequest $request)
     {
-        $result = $this->UsersService->updateUserPassword($request->all(),auth()->user()->id);
+        $result = $this->UsersService->updatePassword($request->all(),auth()->user()->id);
         return back();
     }
 
