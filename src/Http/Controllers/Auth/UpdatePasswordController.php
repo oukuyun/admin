@@ -25,7 +25,7 @@ class UpdatePasswordController extends Controller
      */
     public function store(UpdatePasswordRequest $request)
     {
-        $this->UsersService->updateUserPassword($request->all(),Auth::user()->uuid);
+        $this->UsersService->updatePassword($request->all(),Auth::user()->uuid);
         return ApiResponse::json(["message"=>"更新成功"]);
     }
 }
