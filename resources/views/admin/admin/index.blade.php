@@ -95,7 +95,10 @@
                 orderable:false,
                 searchable:false,
                 render: (data,type,row,meta) => {
-                    return `<a href="{{route('Backend.admin.index',[],false)}}/${data}/edit" class="fs-3"><i class="fa fa-edit" ></i></a>`;
+                    return `
+                        <a href="{{route('Backend.admin.index',[],false)}}/${data}" class="fs-3 me-2 text-success"><i class="fa fa-user" ></i></a>
+                        <a href="{{route('Backend.admin.index',[],false)}}/${data}/edit" class="fs-3"><i class="fa fa-edit" ></i></a>
+                    `;
                 }
             },
         ],

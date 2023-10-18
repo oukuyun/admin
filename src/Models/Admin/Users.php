@@ -73,4 +73,9 @@ class Users extends UserModel
         return $query;
     }
 
+    public function authentications()
+    {
+        return $this->morphMany(\Yadahan\AuthenticationLog\AuthenticationLog::class, 'authenticatable');
+    }
+
 }
