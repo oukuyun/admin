@@ -195,7 +195,17 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return ApiResponse::json(["data"=>$this->UsersService->getUser($id) ]);
+        if(request()->ajax()) {
+            switch (request()->type) {
+                case 'login_records':
+                    return ApiResponse::json(["data"=>$this->UsersService->loginRecordList($id)]);
+                    break;
+            }
+            return ApiResponse::json(["data"=>$this->UsersService->getUser($id) ]);
+        }
+        $user = $this->UsersService->getUser($id);
+        $data['user']   =   $user;
+        return view('admin::admin.detail',$data);
     }
 
     /**

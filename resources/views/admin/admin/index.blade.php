@@ -96,11 +96,18 @@
                 orderable:false,
                 searchable:false,
                 render: (data,type,row,meta) => {
+<<<<<<< HEAD
                     let str = `<a href="{{route('Backend.admin.index',[],false)}}/${data}/edit" class="fs-3"><i class="fa fa-edit" ></i></a>`;
                     if(permission) {
                         str += `<a href="{{route('Backend.permission.index',[],false)}}/${data}/edit" class="fs-3 ms-3 text-warning"><i class="fa-solid fa-shield-halved"></i></a>`;
                     }
                     return str;
+=======
+                    return `
+                        <a href="{{route('Backend.admin.index',[],false)}}/${data}" class="fs-3 me-2 text-success"><i class="fa fa-user" ></i></a>
+                        <a href="{{route('Backend.admin.index',[],false)}}/${data}/edit" class="fs-3"><i class="fa fa-edit" ></i></a>
+                    `;
+>>>>>>> admin-fix
                 }
             },
         ],

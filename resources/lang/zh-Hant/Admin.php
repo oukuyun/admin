@@ -20,8 +20,14 @@ return [
         'oldPassword'   =>  '舊密碼',
         'newPassword'   =>  '新密碼',
         'confirmPassword'=> '確認密碼',
+        'status'        =>  '狀態',
+        'status_options'=>  [
+            0   =>  '停用',
+            1   =>  '正常'
+        ]
     ],
     'adminManger'   =>  '管理員管理',
+    'adminDetail'   =>  '管理員詳情',
     /* B */
     'back'          =>  '返回',
     'backendSystem'         =>  '管理後台',
@@ -38,6 +44,7 @@ return [
     /* D */
     'delete'    =>  '刪除',
     /* E */
+    'edit'  =>  '編輯',
     'error' =>  [
         'accountOrPasswordError'    =>  '帳號或密碼錯誤',
         'oldPasswordError'  =>  '舊密碼不正確',
@@ -60,6 +67,9 @@ return [
     /* L */
     'lastLoginTime' =>  '最後登入時間',
     'login' =>  '登入',
+    'loginIp'       =>  '登入IP',
+    'loginRecords'  =>  '登入紀錄',
+    'loginTime'     =>  '登入時間',
     'loginTimes'    =>  '登入次數',
     'logout'=>  '登出',
     /* M */

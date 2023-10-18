@@ -56,6 +56,18 @@ class UsersService
     }
 
     /**
+     * 使用者登入记录列表
+     * @param array $data
+     * @version 1.0
+     * @author Henry
+     * @return \DataTables
+     */
+    public function loginRecordList($id) {
+        $user = $this->getUser($id);
+        return DataTables::of($user->authentications())->make();
+    }
+
+    /**
      * 取得單一使用者資料
      * @param string $uuid
      * @return object

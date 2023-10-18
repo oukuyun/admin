@@ -52,7 +52,9 @@
                                         @enderror
                                     </div>
                                     
-                                    <img class="img-fluid img-thumbnail mb-3" src="{{ captcha_src() }}" onclick="$(this).attr('src',`${$(this).attr('src')}?${Math.floor((Math.random()*10) + 1)}`);">
+                                    <a href="javascript:void(0)">
+                                        <img class="img-fluid img-thumbnail mb-3" src="{{ captcha_src() }}" onclick="$(this).attr('src',`${$(this).attr('src')}?${Math.floor((Math.random()*10) + 1)}`);">
+                                    </a>
                                     @error('error')
                                         <div class="invalid-feedback animated fadeIn mb-3" style="display:block">{{$message}}</div>
                                     @enderror
