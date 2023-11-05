@@ -13,13 +13,11 @@
         </a>
         <ul class="nav-main-submenu">
             @foreach($menu['children'] as $key => $children)
-                @if(in_array("index",$children['permission']))
                 <li class="nav-main-item">
                     <a class="nav-main-link @if(preg_match("/".$key."/",Route::currentRouteName())) active @endif" href="{{route($key.'.index')}}">
                         <span class="nav-main-link-name">{{__($children['name'])}}</span>
                     </a>
                 </li>
-                @endif
             @endforeach
             
         </ul>
