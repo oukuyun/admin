@@ -10,6 +10,7 @@ use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
 use Oukuyun\Admin\Http\Requests\Admin\Users\StoreRequest;
 use Oukuyun\Admin\Http\Requests\Admin\Users\UpdateRequest;
 use DB;
+use Oukuyun\Admin\Helpers\Universal\Universal;
 
 class UsersController extends Controller
 {
@@ -144,6 +145,9 @@ class UsersController extends Controller
     {
         $this->form['back'] =   route('Backend.admin.index');
         $this->UsersService = $UsersService;
+        if(Universal::permissionEnable()) {
+            $this->PermissionService = app(\Oukuyun\Permission\Services\Admin\PermissionService::class);
+        }
     }
     /**
      * Display a listing of the resource.
@@ -152,6 +156,9 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.admin.index');
+        }
         if($request->expectsJson()) {
             return ApiResponse::json(["data" => $this->UsersService->index(['word'=>$request->search])]);
         }
@@ -165,6 +172,9 @@ class UsersController extends Controller
      */
     public function create()
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.admin.insert');
+        }
         $this->form['action']   =   route('Backend.admin.store');
         $data['form']   =   $this->form;
         \View::share('fields',$this->fields);
@@ -179,6 +189,9 @@ class UsersController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.admin.insert');
+        }
         $this->UsersService->store($request->all());
         if($request->ajax()) {
             return ApiResponse::json(["message"=>__('admin::Admin.success.insertSuccess')]);
@@ -195,6 +208,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.admin.index');
+        }
         if(request()->ajax()) {
             switch (request()->type) {
                 case 'login_records':
@@ -216,6 +232,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.admin.edit');
+        }
         $data['detail'] = $this->UsersService->getUser($id);
         $this->form['action']   =   route('Backend.admin.update',['admin'=>$id]);
         $this->form['method']   =   "PUT";
@@ -243,6 +262,9 @@ class UsersController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.admin.edit');
+        }
         DB::beginTransaction();
         $this->UsersService->update($request->all(),$id);
         DB::commit();
@@ -261,6 +283,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.admin.delete');
+        }
         $this->UsersService->delete($id);
         return ApiResponse::json(["message"=>__('admin::Admin.success.deleteSuccess')]);
     }

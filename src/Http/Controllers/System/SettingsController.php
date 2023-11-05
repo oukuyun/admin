@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Oukuyun\Admin\Http\Responses\Universal\ApiResponse;
 use Oukuyun\Admin\Services\System\SettingsService;
 use Oukuyun\Admin\Http\Requests\System\SettingsRequest;
+use Oukuyun\Admin\Helpers\Universal\Universal;
 
 class SettingsController extends Controller
 {
@@ -27,6 +28,9 @@ class SettingsController extends Controller
     public function __construct(SettingsService $SettingsService)
     {
         $this->SettingsService = $SettingsService;
+        if(Universal::permissionEnable()) {
+            $this->PermissionService = app(\Oukuyun\Permission\Services\Admin\PermissionService::class);
+        }
     }
     /**
      * Display a listing of the resource.
@@ -35,6 +39,9 @@ class SettingsController extends Controller
      */
     public function index(Request $request)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.SystemSettings.index');
+        }
         $lang = \App::currentLocale();
         if($request->lang) {
             $lang = $request->lang;
@@ -56,6 +63,9 @@ class SettingsController extends Controller
 
     public function store(SettingsRequest $request)
     {
+        if(Universal::permissionEnable()) {
+            $this->PermissionService->checkPermission('Backend.SystemSettings.insert');
+        }
         foreach ($request->all() as $key => $value) {
             if(!in_array($key, ['_method', '_token', 'lang'])) {
                 $this->SettingsService->updateSetting($request->lang, $key, $value);

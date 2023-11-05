@@ -2,7 +2,7 @@
 
 return [
 
-    'version'   =>  2,
+    'version'   =>  env('PERMISSION_VERSION',1),
 
     'models' => [
 

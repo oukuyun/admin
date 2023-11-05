@@ -57,10 +57,10 @@ return [
                             'value'         =>  'Backend.admin.edit',
                             'name'          =>  'permission::backend.edit',
                         ],
-                        [
-                            'value'         =>  'Backend.admin.delete',
-                            'name'          =>  'permission::backend.delete',
-                        ],
+                        // [
+                        //     'value'         =>  'Backend.admin.delete',
+                        //     'name'          =>  'permission::backend.delete',
+                        // ],
                     ]
                 ],
                 'Backend.SystemSettings'  =>  [

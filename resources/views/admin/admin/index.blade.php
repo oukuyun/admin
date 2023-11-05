@@ -44,7 +44,7 @@
 <script src="{{asset('backend/assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
 <script>
     var url = "{{route('Backend.admin.index',[],false)}}";
-    var permission = @json(Universal::permissionEnable());
+    var permission = @json((Universal::permissionEnable() && auth()->user()->is_super_admin));
     var search = makeDataTable(
         "#datatable",
         url,
