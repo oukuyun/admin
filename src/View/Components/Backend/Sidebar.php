@@ -21,8 +21,14 @@ class Sidebar extends Component
             if(!auth()->user()->is_super_admin) {
                 foreach ($this->menus as $key => $menu) {
                     foreach ($menu['children']??[] as $route => $child) {
-                        if(!in_array($route, $permissions)) {
-                            unset($this->menus[$key]['children'][$route]);
+                        if(config('permission.version') == 1) {
+                            if(!in_array($route, $permissions)) {
+                                unset($this->menus[$key]['children'][$route]);
+                            }
+                        }else if(config('permission.version') == 2) {
+                            if(!in_array($route.".index", $permissions)) {
+                                unset($this->menus[$key]['children'][$route]);
+                            }
                         }
                     }
                     if(count($this->menus[$key]['children']) == 0) {

@@ -2,6 +2,8 @@
 
 return [
 
+    'version'   =>  2,
+
     'models' => [
 
         /*

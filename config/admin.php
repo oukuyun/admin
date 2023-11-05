@@ -7,6 +7,8 @@ return [
     'lockScreen' => env('LOCK_SCREEN', false),
 
     'multipleLogin' => env('ADMIN_MULTIPLE_LOGIN', false),
+    
+    'permission' => env('PERMISSION', true),
 
     'locale'    =>  'zh-Hant',
 
@@ -42,16 +44,36 @@ return [
                 //系統設定
                 'Backend.admin'  =>  [
                     'name'  =>  'admin::Admin.adminManger',
-                    'permission'    =>  [
-                        'index',
-                        'update',
+                    'permissions'    =>  [
+                        [
+                            'value'         =>  'Backend.admin.index',
+                            'name'          =>  'permission::backend.search',
+                        ],
+                        [
+                            'value'         =>  'Backend.admin.insert',
+                            'name'          =>  'permission::backend.insert',
+                        ],
+                        [
+                            'value'         =>  'Backend.admin.edit',
+                            'name'          =>  'permission::backend.edit',
+                        ],
+                        [
+                            'value'         =>  'Backend.admin.delete',
+                            'name'          =>  'permission::backend.delete',
+                        ],
                     ]
                 ],
                 'Backend.SystemSettings'  =>  [
                     'name'  =>  'admin::Admin.SystemSettings',
                     'permission'    =>  [
-                        'index',
-                        'store',
+                        [
+                            'value'         =>  'Backend.SystemSettings.index',
+                            'name'          =>  'permission::backend.search',
+                        ],
+                        [
+                            'value'         =>  'Backend.SystemSettings.insert',
+                            'name'          =>  'permission::backend.edit',
+                        ],
                     ]
                 ],
             ]
@@ -205,7 +227,5 @@ return [
                 ],
             ]
         ]
-    ],
-
-    'permission'   =>  env('ADMIN_PERMISSION',false),
+    ]
 ];
