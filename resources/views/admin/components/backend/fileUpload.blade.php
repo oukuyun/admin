@@ -8,7 +8,7 @@
         placeholder="{{__($text)}}" 
         @if($required) required @endif @if($disabled) disabled @endif 
     >
-    @error($name)
+    @error(($id??$name))
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
 </div>

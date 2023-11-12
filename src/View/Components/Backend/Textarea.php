@@ -12,12 +12,13 @@ class Textarea extends Component
     public $value;
     public $required;
     public $disabled;
+    public $id;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($text,$placeholder,$name,$value = '',$required = false,$disabled = false)
+    public function __construct($text,$placeholder,$name,$value = '',$required = false,$disabled = false, $id = '')
     {
         $this->name = $name;
         $this->value= $value;
@@ -25,6 +26,7 @@ class Textarea extends Component
         $this->text = $text;
         $this->placeholder = $placeholder;
         $this->disabled = $disabled;
+        $this->id = $id;
     }
 
     /**

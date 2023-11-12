@@ -6,7 +6,7 @@
         @if($checked) checked @endif>
         <label class="form-check-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     </div>
-    @error($name)
+    @error(($id??$name))
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
 </div>

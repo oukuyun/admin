@@ -28,7 +28,7 @@
             @endforeach
         @endif
     </div>
-    @error($name)
+    @error(($id??$name))
         <div id="{{$id}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
 </div>

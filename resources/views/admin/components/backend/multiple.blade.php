@@ -14,6 +14,7 @@
                     @switch($fields[$sub_item['field']]['tag'])
                         @case('select')
                         <x-backend::select 
+                            :id="$sub_item['field']"
                             :children="($fields[$sub_item['field']]['children']??[])" 
                             :options="$fields[$sub_item['field']]['options']" 
                             :text="$fields[$sub_item['field']]['text']" 
@@ -26,6 +27,7 @@
                         @break
                         @case('textarea')
                         <x-backend::textarea 
+                            :id="$sub_item['field']"
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
@@ -35,6 +37,7 @@
                         @break
                         @case('input')
                         <x-backend::input 
+                            :id="$sub_item['field']"
                             :tag="$fields[$sub_item['field']]['tag']" 
                             :type="$fields[$sub_item['field']]['type']" 
                             :text="$fields[$sub_item['field']]['text']" 
@@ -46,6 +49,7 @@
                         @break
                         @case('media')
                         <x-backend::media 
+                            :id="$sub_item['field']"
                             :tag="$fields[$sub_item['field']]['tag']" 
                             :type="$fields[$sub_item['field']]['type']" 
                             :text="$fields[$sub_item['field']]['text']" 
