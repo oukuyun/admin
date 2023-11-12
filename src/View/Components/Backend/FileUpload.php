@@ -15,12 +15,13 @@ class FileUpload extends Component
     public $required;
     public $disabled;
     public $info;
+    public $id;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($tag,$type,$text,$placeholder,$name,$info,$value = '',$required = false,$disabled = false)
+    public function __construct($tag,$type,$text,$placeholder,$name,$info,$value = '',$required = false,$disabled = false, $id = '')
     {
         $this->tag = $tag;
         $this->type = $type;
@@ -31,6 +32,7 @@ class FileUpload extends Component
         $this->placeholder = $placeholder;
         $this->disabled = $disabled;
         $this->info = $info;
+        $this->id = $id;
     }
 
     /**

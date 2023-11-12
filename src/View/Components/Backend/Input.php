@@ -14,12 +14,13 @@ class Input extends Component
     public $value;
     public $required;
     public $disabled;
+    public $id;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($tag,$type,$text,$placeholder,$name,$value = '',$required = false,$disabled = false)
+    public function __construct($tag,$type,$text,$placeholder,$name,$value = '',$required = false,$disabled = false, $id ='')
     {
         $this->tag = $tag;
         $this->type = $type;
@@ -29,6 +30,7 @@ class Input extends Component
         $this->text = $text;
         $this->placeholder = $placeholder;
         $this->disabled = $disabled;
+        $this->id = $id;
     }
 
     /**

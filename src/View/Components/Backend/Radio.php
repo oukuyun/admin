@@ -15,10 +15,11 @@ class Radio extends Component
     public $disabled;
     public $options;
     public $direction;
+    public $id;
     /**
      * Create a new component instance.
      */
-    public function __construct($text,$name,$value = '',$required = false,$disabled = false, $options = [], $direction = 'vertical')
+    public function __construct($text,$name,$value = '',$required = false,$disabled = false, $options = [], $direction = 'vertical', $id = '')
     {
         $this->name = $name;
         $this->value= $value;
@@ -27,6 +28,7 @@ class Radio extends Component
         $this->disabled = $disabled;
         $this->options = $options;
         $this->direction = $direction;
+        $this->id = $id;
     }
 
     /**
