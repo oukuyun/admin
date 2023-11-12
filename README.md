@@ -219,7 +219,7 @@
             }
         });
         ```
-1. `SweetAlert`
+1. `SweetAlert` 
     1. 檔案位置 : `public/js/swal.js`
     1. 使用方式
         ```javascript
