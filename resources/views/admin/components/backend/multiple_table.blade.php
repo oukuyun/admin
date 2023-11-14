@@ -166,6 +166,13 @@
     function makeItem(id) {
         id = seqCheck(id);
         $('#{{$name}}_area').append($('.{{$name}}_template tr').clone().removeClass('{{$name}}_template').prop("outerHTML").replace(/\$i/ig,id));
+        $('#{{$name}}_area select').each(function(){
+            if(!$(this).data('select2')) {
+                $(this).select2({
+                    allowClear: true,
+                });
+            }
+        });
     }
     $(document).on('click', '.delete_{{$name}}_template', function(){
         $(this).parents('tr').remove();
@@ -193,14 +200,6 @@
                 }
             });
         })
-
-        $('#{{$name}}_area select').each(function(){
-            if(!$(this).data('select2')) {
-                $(this).select2({
-                    allowClear: true,
-                });
-            }
-        });
     })
 </script>
 @endpush
