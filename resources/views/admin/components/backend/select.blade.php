@@ -1,18 +1,20 @@
 
 <div class="mb-4">
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
-    <select class="js-select2 form-select" id="{{$name}}" name="{{$name}}" style="width: 100%;" data-placeholder="{{__($text)}}" @if($disabled) disabled @endif @if($multiple) multiple @endif lang="zh-CN">
-        <option></option>
-        @foreach($options as $option)
-        <option value="{{$option['value']}}" 
-            @if($multiple)
-                @if(in_array($option['value'],$value)) selected @endif
-            @else
-                @if($value == $option['value']) selected @endif
-            @endif
-        >{{$option['name']}}</option>
-        @endforeach
-    </select>
+    <div class="select-item">
+        <select class="js-select2 form-select" id="{{$name}}" name="{{$name}}" style="width: 100%;" data-placeholder="{{__($text)}}" @if($disabled) disabled @endif @if($multiple) multiple @endif lang="zh-CN">
+            <option></option>
+            @foreach($options as $option)
+            <option value="{{$option['value']}}" 
+                @if($multiple)
+                    @if(in_array($option['value'],$value)) selected @endif
+                @else
+                    @if($value == $option['value']) selected @endif
+                @endif
+            >{{$option['name']}}</option>
+            @endforeach
+        </select>
+    </div>
     @error(($id??$name))
         <div id="{{$name}}-error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
@@ -36,6 +38,8 @@
             });
         });
     @endif
-    Codebase.helpersOnLoad(['jq-select2']);
+    $(`select[name="{{$name}}"]`).select2({
+        allowClear: true,
+    });
 </script>
 @endpush

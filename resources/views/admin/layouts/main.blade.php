@@ -90,6 +90,20 @@
             .ui-sortable img:active,.ui-sortable img:focus {
                 cursor: grabbing;
             }
+            /* 背景颜色为灰色 */
+            span.selection span.select2-selection__clear {
+                background-color: gray;
+                display: inline-block;
+                font-family: Arial, sans-serif;
+                font-size: 15px;
+                color: white;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%; /* 圆圈的边框半径设置为50% */
+                text-align: center;
+                line-height: 16px;
+                margin-right: 5px;
+            }
         </style>
         @stack('style')
   </head>
