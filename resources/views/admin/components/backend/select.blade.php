@@ -2,7 +2,12 @@
 <div class="mb-4">
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     <div class="select-item">
-        <select class="js-select2 form-select" id="{{$name}}" name="{{$name}}" style="width: 100%;" data-placeholder="{{__($text)}}" @if($disabled) disabled @endif @if($multiple) multiple @endif lang="zh-CN">
+        <select class="js-select2 form-select" id="{{$name}}" name="{{$name}}" style="width: 100%;" data-placeholder="{{__($text)}}"
+            @if($disabled) disabled @endif 
+            @if($multiple) multiple @endif 
+            @if($required) required @endif 
+            @if($children) data-children="{{$children['name']}}" @endif
+            lang="zh-CN">
             <option></option>
             @foreach($options as $option)
             <option value="{{$option['value']}}" 
