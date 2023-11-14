@@ -19,7 +19,7 @@
 5. `php artisan vendor:publish --tag=admin-public`
 6. `php artisan vendor:publish --tag=admin-config`
 7. `php artisan migrate`
-8. `php artisan db:seed --class="Oukuyun\Admin\Database\Seeders\DatabaseSeeder"`
+8. `php artisan db:seed --class="Oukuyun\Admin\database\seeders\DatabaseSeeder"`
 
 ## 啟動服務
 1. `cd <folder name>`
@@ -219,7 +219,7 @@
             }
         });
         ```
-1. `SweetAlert`
+1. `SweetAlert` 
     1. 檔案位置 : `public/js/swal.js`
     1. 使用方式
         ```javascript

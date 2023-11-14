@@ -87,6 +87,15 @@
                             :id="$sub_item['field']"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
+                        @case('multiple_table')
+                        <x-backend::multiple_table 
+                            :text="$fields[$sub_item['field']]['text']" 
+                            :key="$fields[$sub_item['field']]['key']" 
+                            :name="$fields[$sub_item['field']]['name']" 
+                            :parameters="$fields[$sub_item['field']]['parameters']"
+                            :id="$sub_item['field']"
+                            :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                        @break
                     @endswitch
                 @endif
             @endforeach
