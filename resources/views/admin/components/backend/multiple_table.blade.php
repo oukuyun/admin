@@ -19,6 +19,7 @@
         <tbody id="{{$name}}_area"></tbody>
     </table>
 </div>
+@push('style')
 <style>
     .multiple_table td label  {
         display: none;
@@ -53,12 +54,17 @@
             flex: 1;
             align-items: center;
         }
+        .multiple_table td .select-item {
+            display: flex;
+            flex: 1;
+            align-items: center;
+        }
         .multiple_table td:last-of-type {
             justify-content: right;
         }
     }
 </style>
-
+@endpush
 @push('template')
 <table class="{{$name}}_template ">
     <tbody>
@@ -140,6 +146,7 @@
 @push('javascript')
 <script>
     var {{$name}}_data = @json($value);
+    
     $('#{{$name}}_template_add').click(function(){
         makeItem(($('#{{$name}}_area .template_area').length + 1));
     });
@@ -163,6 +170,12 @@
     $(document).on('click', '.delete_{{$name}}_template', function(){
         $(this).parents('tr').remove();
     }).ready(function(){
+        $('.{{$name}}_template select').each(function(){
+            if($(this).data('select2')) {
+                $(this).select2("destroy");
+            }
+        });
+
         {{$name}}_data.map((item, key) => {
             let id = key + 1;
             makeItem(id);
@@ -180,6 +193,14 @@
                 }
             });
         })
+
+        $('#{{$name}}_area select').each(function(){
+            if(!$(this).data('select2')) {
+                $(this).select2({
+                    allowClear: true,
+                });
+            }
+        });
     })
 </script>
 @endpush
