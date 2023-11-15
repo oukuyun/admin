@@ -16,7 +16,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody id="{{$name}}_area"></tbody><input type="hidden" name="tags[$i][status]" value="0">
+        <tbody id="{{$name}}_area"></tbody>
     </table>
 </div>
 @push('style')
