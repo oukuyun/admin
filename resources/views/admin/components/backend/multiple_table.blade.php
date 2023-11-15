@@ -194,6 +194,11 @@
                             element.text(item[key])
                             break;
                         default:
+                            if(element.prop('type') == 'checkbox') {
+                                if(!item[key]) {
+                                    element.removeAttr('checked');
+                                }
+                            }
                             element.val(item[key])
                             break;
                     }
