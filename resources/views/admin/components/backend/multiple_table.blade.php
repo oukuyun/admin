@@ -16,7 +16,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody id="{{$name}}_area"></tbody>
+        <tbody id="{{$name}}_area"></tbody><input type="hidden" name="tags[$i][status]" value="0">
     </table>
 </div>
 @push('style')
@@ -77,7 +77,7 @@
                     <span class="no">
                         $i
                     </span>
-                    <input type="hidden" name="{{$name}}[$i][{{$key}}]">
+                    <input type="hidden" name="{{$name}}[$i][{{$key}}]" id="{{$name}}[$i][{{$key}}]">
                 </div>
             </td>
             @foreach($parameters as $item)
@@ -187,7 +187,7 @@
             let id = key + 1;
             makeItem(id);
             Object.keys(item).map((key) => {
-                let element = $(`[name="{{$name}}[${id}][${key}]"]`);
+                let element = $(`[id="{{$name}}[${id}][${key}]"]`);
                 if(element.length > 0 ) {
                     switch (element.prop("tagName")) {
                         case 'TEXTAREA':
