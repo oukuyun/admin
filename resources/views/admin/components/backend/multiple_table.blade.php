@@ -198,8 +198,9 @@
                                 if(!item[key]) {
                                     element.removeAttr('checked');
                                 }
+                            }else{
+                                element.val(item[key])
                             }
-                            element.val(item[key])
                             break;
                     }
                 }
