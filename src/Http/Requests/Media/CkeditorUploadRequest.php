@@ -24,7 +24,7 @@ class CkeditorUploadRequest extends BasicFormRequest
     public function rules()
     {
         return [
-            'upload'      =>  'required|mimes:jpg,bmp,png,jpeg,gif',
+            'upload'      =>  'required|mimes:jpg,bmp,png,jpeg,gif,svg',
         ];
     }
 
