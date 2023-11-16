@@ -47,4 +47,8 @@ trait QueryTrait
     public function search(array $where) {
         return $this->listQuery($where)->first();
     }
+
+    public function getDetailFields() {
+        return $this->detail??[];
+    }
 }
