@@ -24,7 +24,7 @@ class UploadRequest extends BasicFormRequest
     public function rules()
     {
         return [
-            'file'      =>  'required|mimes:jpg,bmp,png,pdf,csv,xlsx,jpeg,gif',
+            'file'      =>  'required|mimes:jpg,bmp,png,pdf,csv,xlsx,jpeg,gif,svg',
         ];
     }
 
