@@ -30,7 +30,7 @@
         "laravel/tinker": "^2.7",
         "fruitcake/laravel-cors": "^2.0",
         "mews/captcha": "^3.2",
-        "owen-it/laravel-auditing": "^12.0",
+        "owen-it/laravel-auditing": "^13.5",
         "yadahan/laravel-authentication-log": "^1.5",
         "yajra/laravel-datatables-oracle": "^9.19",
         "spatie/laravel-sitemap": "^6.1",
