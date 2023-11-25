@@ -190,7 +190,7 @@
 
         multiple_data['{{$name}}'].map((item, key) => {
             let id = key + 1;
-            makeItem(id);
+            makeItem(id, '{{$name}}');
             Object.keys(item).map((key) => {
                 let element = $(`[id="{{$name}}[${id}][${key}]"]`);
                 if(element.length > 0 ) {
