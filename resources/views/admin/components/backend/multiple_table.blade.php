@@ -145,6 +145,7 @@
 @endpush
 @pushonce('javascript')
 <script>
+    var multiple_data = [];
     function seqCheck(seq, name) {
         let check = false;
         $(`#${name}_area .template_area`).each(function() {
@@ -173,7 +174,7 @@
 @endpushonce
 @push('javascript')
 <script>
-    var {{$name}}_data = @json($value);
+    multiple_data['{{$name}}'] = @json($value);
     
     $('#{{$name}}_template_add').click(function(){
         makeItem(($('#{{$name}}_area .template_area').length + 1), '{{$name}}');
@@ -187,7 +188,7 @@
             }
         });
 
-        {{$name}}_data.map((item, key) => {
+        multiple_data['{{$name}}'].map((item, key) => {
             let id = key + 1;
             makeItem(id);
             Object.keys(item).map((key) => {
