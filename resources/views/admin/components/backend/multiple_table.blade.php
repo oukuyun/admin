@@ -137,7 +137,7 @@
             </td>
             @endforeach
             <td>
-                <button class="btn btn-sm btn-danger delete_{{$name}}_template" type="button">{{__('admin::Admin.delete')}}</button>
+                <button class="btn btn-sm btn-danger delete_multiple_template" type="button">{{__('admin::Admin.delete')}}</button>
             </td>
         </tr>
     </tbody>
@@ -170,6 +170,9 @@
             }
         });
     }
+    $(document).on('click', '.delete_multiple_template', function(){
+        $(this).parents('tr').remove();
+    });
 </script>
 @endpushonce
 @push('javascript')
@@ -177,11 +180,9 @@
     multiple_data['{{$name}}'] = @json($value);
     
     $('[id="{{$name}}_template_add"]').click(function(){
-        makeItem(($('#{{$name}}_area .template_area').length + 1), '{{$name}}');
+        makeItem(($('[id="{{$name}}_area"] .template_area').length + 1), '{{$name}}');
     });
-    $(document).on('click', '.delete_{{$name}}_template', function(){
-        $(this).parents('tr').remove();
-    }).ready(function(){
+    $(document).ready(function(){
         $('[id="${name}_template"] select').each(function(){
             if($(this).data('select2')) {
                 $(this).select2("destroy");
