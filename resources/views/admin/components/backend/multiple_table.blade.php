@@ -143,28 +143,23 @@
     </tbody>
 </table>
 @endpush
-@push('javascript')
+@pushonce('javascript')
 <script>
-    var {{$name}}_data = @json($value);
-    
-    $('#{{$name}}_template_add').click(function(){
-        makeItem(($('#{{$name}}_area .template_area').length + 1), '{{$name}}');
-    });
-    function seqCheck(seq) {
+    function seqCheck(seq, name) {
         let check = false;
-        $('#{{$name}}_area .template_area').each(function() {
-            let regexp = new RegExp(`{{$name}}\\[${seq}\\]`,'gs');
+        $(`#${name}_area .template_area`).each(function() {
+            let regexp = new RegExp(`${name}\\[${seq}\\]`,'gs');
             if($(this).prop("outerHTML").match(regexp) != null) {
                 check = true;
             }
         });
         if(check) {
-            return seqCheck((seq+1));
+            return seqCheck((seq+1), name);
         }
         return seq;
     }
     function makeItem(id, name) {
-        id = seqCheck(id);
+        id = seqCheck(id, name);
         $(`#${name}_area`).append($(`.${name}_template tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
         $(`#${name}_area select`).each(function(){
             if(!$(this).data('select2')) {
@@ -174,6 +169,15 @@
             }
         });
     }
+</script>
+@endpushonce
+@push('javascript')
+<script>
+    var {{$name}}_data = @json($value);
+    
+    $('#{{$name}}_template_add').click(function(){
+        makeItem(($('#{{$name}}_area .template_area').length + 1), '{{$name}}');
+    });
     $(document).on('click', '.delete_{{$name}}_template', function(){
         $(this).parents('tr').remove();
     }).ready(function(){
