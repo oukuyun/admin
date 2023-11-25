@@ -1,7 +1,7 @@
-<div class="mb-4">
+<div class="mb-4 multiple_table" id="{{$name}}_multiple_table">
     <label class="form-label" for="{{$name}}">{{__($text)}}@if($required)<span class="text-danger">*</span>@endif</label>
     <button type="button" class="ms-2 btn btn-sm btn-danger" id="{{$name}}_template_add">{{__('admin::Admin.insert')}}</button>
-    <table class="multiple_table table table-bordered table-striped table-vcenter js-dataTable-full mt-2">
+    <table class="table table-bordered table-striped table-vcenter js-dataTable-full mt-2">
         <thead>
             <tr>
                 <th>#</th>
@@ -19,52 +19,52 @@
         <tbody id="{{$name}}_area"></tbody>
     </table>
 </div>
-@push('style')
+@pushonce('style')
 <style>
-    .multiple_table td label  {
+    .multiple_table table td label  {
         display: none;
     }
-    .multiple_table td .mb-4 {
+    .multiple_table table td .mb-4 {
         margin-bottom: 0!important;
     }
     @media (max-width: 992px) {
-        .multiple_table thead {
+        .multiple_table table thead {
             display: none;
         }
         .multiple_table td {
             display:flex;
         }
-        .multiple_table td .mb-4 {
+        .multiple_table table td .mb-4 {
             display: flex;
             width: 100%;
         }
-        .multiple_table td label {
+        .multiple_table table td label {
             display: flex;
             justify-content: right;
             padding-right: 20px;
             align-items: center;
             flex: 0.3;
         }
-        .multiple_table td .no {
+        .multiple_table table td .no {
             display: flex;
             flex: 1;
         }
-        .multiple_table td input {
-            display: flex;
-            flex: 1;
-            align-items: center;
-        }
-        .multiple_table td .select-item {
+        .multiple_table table td input {
             display: flex;
             flex: 1;
             align-items: center;
         }
-        .multiple_table td:last-of-type {
+        .multiple_table table td .select-item {
+            display: flex;
+            flex: 1;
+            align-items: center;
+        }
+        .multiple_table table td:last-of-type {
             justify-content: right;
         }
     }
 </style>
-@endpush
+@endpushonce
 @push('template')
 <table class="{{$name}}_template ">
     <tbody>
