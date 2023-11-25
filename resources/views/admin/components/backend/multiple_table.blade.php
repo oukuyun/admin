@@ -148,7 +148,7 @@
     var multiple_data = [];
     function seqCheck(seq, name) {
         let check = false;
-        $(`#${name}_area .template_area`).each(function() {
+        $(`[id="${name}_area"] .template_area`).each(function() {
             let regexp = new RegExp(`${name}\\[${seq}\\]`,'gs');
             if($(this).prop("outerHTML").match(regexp) != null) {
                 check = true;
@@ -161,8 +161,8 @@
     }
     function makeItem(id, name) {
         id = seqCheck(id, name);
-        $(`#${name}_area`).append($(`.${name}_template tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
-        $(`#${name}_area select`).each(function(){
+        $(`[id="${name}_area"]`).append($(`.${name}_template tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
+        $(`[id="${name}_area"] select`).each(function(){
             if(!$(this).data('select2')) {
                 $(this).select2({
                     allowClear: true,
@@ -176,7 +176,7 @@
 <script>
     multiple_data['{{$name}}'] = @json($value);
     
-    $('#{{$name}}_template_add').click(function(){
+    $('[id="{{$name}}_template_add"]').click(function(){
         makeItem(($('#{{$name}}_area .template_area').length + 1), '{{$name}}');
     });
     $(document).on('click', '.delete_{{$name}}_template', function(){
