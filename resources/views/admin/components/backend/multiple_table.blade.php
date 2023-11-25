@@ -161,7 +161,7 @@
     }
     function makeItem(id, name) {
         id = seqCheck(id, name);
-        $(`[id="${name}_area"]`).append($(`[id="${name}_template"]] tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
+        $(`[id="${name}_area"]`).append($(`[id="${name}_template"] tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
         $(`[id="${name}_area"] select`).each(function(){
             if(!$(this).data('select2')) {
                 $(this).select2({
