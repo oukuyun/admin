@@ -66,7 +66,7 @@
 </style>
 @endpushonce
 @push('template')
-<table class="{{$name}}_template ">
+<table class="{{$name}}_template " id="{{$name}}_template">
     <tbody>
         <tr class="template_area">
             <td>
@@ -161,7 +161,7 @@
     }
     function makeItem(id, name) {
         id = seqCheck(id, name);
-        $(`[id="${name}_area"]`).append($(`.${name}_template tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
+        $(`[id="${name}_area"]`).append($(`[id="${name}_template"]] tr`).clone().removeClass(`${name}_template`).prop("outerHTML").replace(/\$i/ig,id));
         $(`[id="${name}_area"] select`).each(function(){
             if(!$(this).data('select2')) {
                 $(this).select2({
@@ -182,7 +182,7 @@
     $(document).on('click', '.delete_{{$name}}_template', function(){
         $(this).parents('tr').remove();
     }).ready(function(){
-        $('.{{$name}}_template select').each(function(){
+        $('[id="${name}_template"] select').each(function(){
             if($(this).data('select2')) {
                 $(this).select2("destroy");
             }
