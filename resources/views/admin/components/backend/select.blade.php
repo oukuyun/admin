@@ -32,7 +32,7 @@
                 '{{route($children['ajax']['url'],[],false)}}','{{$children['ajax']['method']}}',
                 {
                     @foreach($children['ajax']['data'] as $key => $value)
-                    {{$key}}:@if($value=='value') $(this).val() @elseif($value == 'text') $(this).text() @else '{{$value}}' @endif
+                    {{$key}}:@if($value=='value') $(this).val() @elseif($value == 'text') $(this).find('option:selected').text() @else '{{$value}}' @endif
                     @endforeach
                 },function(result){
                 let str = '';
