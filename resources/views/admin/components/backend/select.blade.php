@@ -36,10 +36,12 @@
                     @endforeach
                 },function(result){
                 let str = '';
+                let select = $(`select[name="{{$children['name']}}"]`);
+                let value = select.val();
                 result.data.children.map((item)=>{
-                    str += `<option value="${item.id}">${item.name}</option>`
+                    str += `<option value="${item.id}" ${((value == item.id)?'selected':'')}>${item.name}</option>`
                 });
-                $(`select[name="{{$children['name']}}"]`).html(str);
+                select.html(str);
             });
         });
     @endif
