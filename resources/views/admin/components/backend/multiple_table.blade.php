@@ -183,7 +183,7 @@
         makeItem(($('[id="{{$name}}_area"] .template_area').length + 1), '{{$name}}');
     });
     $(document).ready(function(){
-        $('[id="${name}_template"] select').each(function(){
+        $('[id="{{$name}}_template"] select').each(function(){
             if($(this).data('select2')) {
                 $(this).select2("destroy");
             }
