@@ -52,6 +52,17 @@
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
+                        @case('radio')
+                        <x-backend::radio 
+                            :id="$sub_item['field']"
+                            :text="$fields[$sub_item['field']]['text']" 
+                            :name="$fields[$sub_item['field']]['name']" 
+                            :options="$fields[$sub_item['field']]['options']" 
+                            :direction="$fields[$sub_item['field']]['direction']??'vertical'" 
+                            :required="$fields[$sub_item['field']]['required']??false"
+                            :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
+                        @break
                         @case('checkbox')
                         <x-backend::checkbox 
                             :id="$sub_item['field']"
