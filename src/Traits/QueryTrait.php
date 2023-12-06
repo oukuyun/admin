@@ -29,12 +29,15 @@ trait QueryTrait
      * @version 1.0
      * @author Henry
      */
-    public function getDetail(string $id) {
+    public function getDetail(string $id, $where = []) {
         $query = $this->select($this->detail);
         if(isset($this->withs) && $this->withs) {
             $query = $query->with($this->withs);
         }
-        return $query->find($id);
+        if($where) {
+            $query = $query->where($where);
+        }
+        return $query->where($this->getKeyName(), $id)->first();
     }
 
     /**
