@@ -29,8 +29,8 @@
             @else
                 @foreach($media_value as $item)
                 <div class="col-4 mb-2">
-                    <input type="hidden" name="{{$id}}@if($multi_language)[{{$language->code}}]@endif[]" value="{{$item['id']}}">
-                    <img src="{{$item['url']}}" class="rounded w-100">
+                    <input type="hidden" name="{{$id}}@if($multi_language)[{{$language->code}}]@endif[]" value="{{$item['id']??''}}">
+                    <img src="{{$item['url']??''}}" class="rounded w-100">
                 </div>
                 @endforeach
             @endif

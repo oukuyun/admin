@@ -1,4 +1,4 @@
-@if($languages->count() > 1)
+@if($languages->count() > 1 && ($form['language']??false))
 <div class="d-flex mb-3">
     @foreach($languages as $language)
     <div class="me-1">

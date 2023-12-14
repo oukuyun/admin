@@ -45,9 +45,6 @@
         border-color: #fff #ddd #ddd #ddd;
         border-radius: 0px 0px 5px 5px;
     }
-    .language {
-        display:none;
-    }
 </style>
 @endpush
 @push('javascript')
