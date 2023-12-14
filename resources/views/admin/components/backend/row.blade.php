@@ -85,7 +85,6 @@
                             :type="$fields[$sub_item['field']]['type']" 
                             :text="$fields[$sub_item['field']]['text']" 
                             :name="$fields[$sub_item['field']]['name']" 
-                            :info="$fields[$sub_item['field']]['info']"
                             :multiple="$fields[$sub_item['field']]['multiple']??false"
                             :id="$sub_item['field']"
                             :placeholder="$fields[$sub_item['field']]['placeholder']"

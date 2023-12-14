@@ -13,7 +13,6 @@ class Media extends Component
     public $value;
     public $required;
     public $disabled;
-    public $info;
     public $multiple;
     public $id;
     public $multi_language;
@@ -22,7 +21,7 @@ class Media extends Component
      *
      * @return void
      */
-    public function __construct($tag,$type,$text,$name,$info,$id,$value = '',$multiple = false,$required = false,$disabled = false, $multiLanguage = false)
+    public function __construct($tag,$type,$text,$name,$id,$value = '',$multiple = false,$required = false,$disabled = false, $multiLanguage = false)
     {
         $this->tag = $tag;
         $this->type = $type;
@@ -31,7 +30,6 @@ class Media extends Component
         $this->required = $required;
         $this->text = $text;
         $this->disabled = $disabled;
-        $this->info = $info;
         $this->multiple = $multiple;
         $this->id = $id;
         $this->multi_language = $multiLanguage;
