@@ -416,7 +416,7 @@
             }
             function makeSelectImage() {
                 media_target.val($('.upload-image input:checked').val());
-                $(`#${media_target.attr('id')}_image_area`).html('');
+                $(`[id="${media_target.attr('id')}_image_area"]`).html('');
                 let temp;
                 if(media_mutiple) {
                     temp = media_temp;
@@ -424,14 +424,14 @@
                     temp = [media_temp];
                 }
                 temp.map((item) => {
-                    $(`#${media_target.attr('id')}_image_area`).append(`
+                    $(`[id="${media_target.attr('id')}_image_area"]`).append(`
                         <div class="col-4 mb-2">
                             ${(media_mutiple)?`<input type="hidden" name="${media_target.attr('id')}[]" value="${item}">`:``}
-                            <img src="${$(`#image_${item}`).find('img').attr('src')}" class="rounded w-100">
+                            <img src="${$(`[id="image_${item}"]`).find('img').attr('src')}" class="rounded w-100">
                         </div>
                     `);
                 })
-                $(`#${media_target.attr('id')}_image_area`).sortable();
+                $(`[id="${media_target.attr('id')}_image_area"]`).sortable();
             }
             $(document).on('click','.upload-image-delete',function(){
                 var id = $(this).data('id');
@@ -447,7 +447,7 @@
                     if(result.isConfirmed) {
                         sendApi('{{route('Backend.media.image.index',[],false)}}/'+id,'DELETE',{},function(result){
                             delete media_temp[$.inArray(id,media_temp)];
-                            $(`#image_${id}`).remove();
+                            $(`[id="image_${id}"]`).remove();
                             makeSelectImage();
                         });
                     }
