@@ -1,3 +1,12 @@
+@if($languages->count() > 1)
+<div class="d-flex mb-3">
+    @foreach($languages as $language)
+    <div class="me-1">
+        <a href="javascript:void(0)" data-lang="{{$language->code}}" class="btn btn-sm @if(\App::getLocale() == $language->code) btn-info @else btn-outline-info @endif language">{{$language->name}}</a>
+    </div>
+    @endforeach
+</div>
+@endif
 <form action="{{$form['action']}}" method="POST" name="{{$form['name']}}" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="{{$form['method']}}">
     @csrf
@@ -21,6 +30,13 @@
 </div>
 @push('javascript')
 <script>
+    $('.language').click(function() {
+        $('.language').removeClass('btn-info').addClass('btn-outline-info');
+        $(this).removeClass('btn-outline-info').addClass('btn-info');
+        let lang = $(this).data('lang');
+        $('[class*="language-"]').hide();
+        $(`.language-${lang}`).show();
+    })
     Codebase.onLoad((
         ()=>class{
             static initValidation(){

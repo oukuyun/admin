@@ -28,6 +28,7 @@
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :multi_language="($fields[$sub_item['field']]['multi_language']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('ckeditor5')
@@ -38,6 +39,7 @@
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :multi_language="($fields[$sub_item['field']]['multi_language']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('input')
@@ -50,6 +52,7 @@
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :multi_language="($fields[$sub_item['field']]['multi_language']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('radio')
@@ -72,6 +75,7 @@
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :checked="($fields[$sub_item['field']]['checked']??false)"
+                            :multi_language="($fields[$sub_item['field']]['multi_language']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('media')
@@ -87,6 +91,7 @@
                             :placeholder="$fields[$sub_item['field']]['placeholder']"
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
+                            :multi_language="($fields[$sub_item['field']]['multi_language']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('multiple')

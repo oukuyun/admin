@@ -15,12 +15,13 @@ class Checkbox extends Component
     public $disabled;
     public $checked;
     public $id;
+    public $multi_language;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($tag, $text, $name, $value = '', $required = false, $disabled = false, $checked = false, $id = '')
+    public function __construct($tag, $text, $name, $value = '', $required = false, $disabled = false, $checked = false, $id = '', $multiLanguage = false)
     {
         $this->tag = $tag;
         $this->name = $name;
@@ -30,6 +31,7 @@ class Checkbox extends Component
         $this->disabled = $disabled;
         $this->checked = $checked;
         $this->id = $id;
+        $this->multi_language = $multiLanguage;
     }
 
     /**

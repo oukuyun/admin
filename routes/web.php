@@ -20,6 +20,7 @@ Route::middleware(['admin'])->prefix('backend')->name('Backend.')->namespace('Ou
 
     $middleware = [
         'admin.auth',
+        'admin.admin',
     ];
 
     Route::middleware($middleware)->group(function () {
