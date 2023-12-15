@@ -1,10 +1,9 @@
-
 <div class="{{$row['class']}}">
     @foreach($row['col'] as $item)
         <div class="{{$item['class']}}">
             @foreach($item['col'] as $sub_item)
                 @if($sub_item['class'] == 'row')
-                    <x-backend::row :row="$sub_item" />
+                    <x-backend::row :row="$sub_item" :fields="$fields"/>
                 @elseif($sub_item['class'] == 'fields')
                     @switch($fields[$sub_item['field']]['tag'])
                         @case('select')
