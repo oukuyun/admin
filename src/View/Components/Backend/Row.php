@@ -7,14 +7,17 @@ use Illuminate\View\Component;
 class Row extends Component
 {
     public $row;
+
+    public $fields;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($row)
+    public function __construct($row, $fields = [])
     {
         $this->row = $row;
+        $this->fields = $fields;
     }
 
     /**
