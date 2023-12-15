@@ -11,11 +11,14 @@
     <input type="hidden" name="_method" value="{{$form['method']}}">
     @csrf
     @foreach($form['form'] as $row)
-    <x-backend::row :row="$row" />
+    <x-backend::row :row="$row" :fields="$fields" />
     @endforeach
     @error('error')
         <div id="error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
+    @if(($form['seo']??false) && class_exists(\Oukuyun\Seo\SeoServiceProvider::class))
+    <x-backend::seo />
+    @endif
     <div class="row">
         <div class="mb-4">
             <button type="submit" class="btn btn-primary">{{__('admin::Admin.sent')}}</button>
