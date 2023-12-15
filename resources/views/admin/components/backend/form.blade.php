@@ -17,7 +17,7 @@
         <div id="error" class="invalid-feedback animated fadeIn" style="display:block">{{$message}}</div>
     @enderror
     @if(($form['seo']??false) && class_exists(\Oukuyun\Seo\SeoServiceProvider::class))
-    <x-seo::backend.seo />
+    <x-backend::seo />
     @endif
     <div class="row">
         <div class="mb-4">
