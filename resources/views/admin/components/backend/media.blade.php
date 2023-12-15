@@ -10,7 +10,7 @@
         <input 
             type="text" 
             id="{{$id}}@if($multi_language)[{{$language->code}}]@endif" 
-            name="{{$id}}@if($multi_language)[{{$language->code}}]@endif" 
+            name="{{$name}}@if($multi_language)[{{$language->code}}]@endif" 
             value="{{($multiple)?$media_value->pluck('id'):$media_value['id']??''}}" 
             @if($required) required @endif 
             data-multiple="@json($multiple)"
@@ -29,7 +29,7 @@
             @else
                 @foreach($media_value as $item)
                 <div class="col-4 mb-2">
-                    <input type="hidden" name="{{$id}}@if($multi_language)[{{$language->code}}]@endif[]" value="{{$item['id']??''}}">
+                    <input type="hidden" name="{{$name}}@if($multi_language)[{{$language->code}}]@endif[]" value="{{$item['id']??''}}">
                     <img src="{{$item['url']??''}}" class="rounded w-100">
                 </div>
                 @endforeach
