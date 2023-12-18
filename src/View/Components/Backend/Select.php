@@ -16,14 +16,15 @@ class Select extends Component
     public $multiple;
     public $children;
     public $id;
+    public $multi_language;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($text,$placeholder,$name,$options,$children,$multiple=false,$value = '',$required = false,$disabled = false, $id = '')
+    public function __construct($text,$placeholder,$name,$options,$children,$multiple=false,$value = '',$required = false,$disabled = false, $id = '', $multiLanguage = false)
     {
-        $this->name = $name;
+        $this->name = str_replace("[]", "", $name);
         $this->value= $value;
         $this->required = $required;
         $this->text = $text;
@@ -33,6 +34,7 @@ class Select extends Component
         $this->multiple = $multiple;
         $this->children = $children;
         $this->id = $id;
+        $this->multi_language = $multiLanguage;
     }
 
     /**
