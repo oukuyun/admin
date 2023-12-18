@@ -17,6 +17,7 @@
                             :required="$fields[$sub_item['field']]['required']??false"
                             :disabled="($fields[$sub_item['field']]['disabled']??false)"
                             :multiple="($fields[$sub_item['field']]['multiple']??false)"
+                            :multi_language="($fields[$sub_item['field']]['multi_language']??false)"
                             :value="(old($sub_item['field'])??($fields[$sub_item['field']]['value']??''))" />
                         @break
                         @case('textarea')
