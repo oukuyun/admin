@@ -15,9 +15,9 @@
                 @foreach($options as $option)
                 <option value="{{$option['value']}}" 
                     @if($multiple)
-                        @if(in_array($option['value'],$value)) selected @endif
+                        @if(in_array($option['value'],(($multi_language)?$value[$language->code]??[]:$value))) selected @endif
                     @else
-                        @if($value == $option['value']) selected @endif
+                        @if((($multi_language)?$value[$language->code]??'':$value) == $option['value']) selected @endif
                     @endif
                 >{{$option['name']}}</option>
                 @endforeach
