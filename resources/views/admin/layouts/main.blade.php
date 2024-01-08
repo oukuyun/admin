@@ -153,7 +153,7 @@
                         <!-- Logo -->
                         <div>
                             <a class="link-fx fw-bold tracking-wide mx-auto" href="{{route('Backend.dashboard.index')}}">
-                                <img src="{{asset(Universal::version('front/asset/images/logo.png'))}}" alt="" width="200">
+                                <img src="{{asset(Universal::version(config('admin.logo')))}}" alt="" width="200">
                             </a>
                         </div>
                         <!-- END Logo -->

@@ -8,6 +8,8 @@ return [
 
     'multipleLogin' => env('ADMIN_MULTIPLE_LOGIN', false),
 
+    'logo'  =>  '/asset/images/logo.png',
+
     'locale'    =>  'zh-Hant',
 
     'guards' => [
