@@ -11,7 +11,7 @@
             type="text" 
             id="{{$id}}@if($multi_language)[{{$language->code}}]@endif" 
             name="{{$name}}@if($multi_language)[{{$language->code}}]@endif" 
-            value="{{($multiple)?$media_value->pluck('id'):$media_value['id']??''}}" 
+            value="{{($multiple)?(($media_value->count() > 0)?$media_value->pluck('id'):''):$media_value['id']??''}}" 
             @if($required) required @endif 
             data-multiple="@json($multiple)"
             style="width:0;height:0;border:0;outline:0;"
