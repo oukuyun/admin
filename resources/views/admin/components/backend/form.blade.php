@@ -40,6 +40,9 @@
         $('[class*="language-"]').hide();
         $(`.language-${lang}`).show();
     })
+    @if($languages->count() > 1 && ($form['language']??false))
+    var validate_lang = @json($languages->pluck('code')->toArray());
+    @endif
     Codebase.onLoad((
         ()=>class{
             static initValidation(){
@@ -51,6 +54,20 @@
                         Codebase.block('state_toggle','.block-rounded');
                         return true;
                     },
+                    @if($languages->count() > 1 && ($form['language']??false))
+                    invalidHandler:(e,v) => {
+                        let check = false;
+                        validate_lang.map((lang) => {
+                            Object.keys(v.errorMap).map((key) => {
+                                if(key.match(new RegExp(lang)) && !check) {
+                                    $(`.language[data-lang="${lang}"]`).click();
+                                    check = true;
+                                    // break;
+                                }
+                            })
+                        })
+                    },
+                    @endif
                 })
             }
             static init(){
