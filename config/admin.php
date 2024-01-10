@@ -10,6 +10,8 @@ return [
     
     'permission' => env('PERMISSION', true),
 
+    'logo'  =>  '/asset/images/logo.png',
+
     'locale'    =>  'zh-Hant',
 
     'guards' => [
