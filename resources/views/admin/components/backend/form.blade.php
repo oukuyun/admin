@@ -45,6 +45,7 @@
             static initValidation(){
                 Codebase.helpers("jq-validation"),
                 $(`form[name="{{$form['name']}}"]`).validate({
+                    ignore: [],
                     rules:@json(collect($fields)->map(function($item){ return $item['rules'];})),
                     submitHandler: function() {
                         Codebase.block('state_toggle','.block-rounded');
