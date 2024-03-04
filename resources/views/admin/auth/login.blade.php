@@ -21,7 +21,7 @@
             <!-- Main Container -->
             <main id="main-container">
                 <!-- Page Content -->
-                <div class="bg-image" style="background-image: url('{{asset(Universal::version('backend/assets/media/photos/photo34@2x.jpg'))}}');">
+                <div class="bg-image" style="background-image: url('{{asset(Universal::version(config('admin.login_banner')??'backend/assets/media/photos/photo34@2x.jpg'))}}');">
                     <div class="row mx-0 bg-black-50">
                         <div class="hero-static col-md-6 col-xl-8 d-none d-md-flex align-items-md-end"></div>
                         <div class="hero-static col-md-6 col-xl-4 d-flex align-items-center bg-body-extra-light">
